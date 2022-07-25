@@ -1,7 +1,8 @@
 package eventManager;
+
 public class Booth {
 	
-	enum BoothType {
+	public enum BoothType {
 		  FOOD,
 		  DRINK,
 		  ACTIVITY,
