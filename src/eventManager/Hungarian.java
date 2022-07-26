@@ -36,7 +36,7 @@ public class Hungarian {
 	public int[] runHungarian() {
 		step1();
 		step2();
-		while (numCoveredLines != mainArr.length) {
+		while (numCoveredLines < mainArr.length) {
 			step3();
 			step2();
 		}
