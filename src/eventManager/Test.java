@@ -35,10 +35,20 @@ public class Test {
 		list.add(b2);
 		list.add(b3);
 		list.add(b4);
+		list.add(b5);
 		list.add(b6);
 		list.add(b7);
-		list.add(b8);
-		list.add(b9);
+		//list.add(b8);
+		//list.add(b9);
+		
+		Booth[][] spots = new Booth[3][3];
+		spots[0][0] = new Booth();
+		spots[0][1] = new Booth();
+		BoothPlacer placer = new BoothPlacer(list,spots);
+		spots = placer.placeBooths();
+		for (int i = 0; i < spots.length; i++) {
+			System.out.println(Arrays.toString(spots[i]));
+		}
 		
 		// Name, description, int popularity, type
 	}
