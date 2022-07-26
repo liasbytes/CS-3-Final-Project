@@ -1,12 +1,12 @@
 package eventManager;
-
 public class Booth {
 	
 	public enum BoothType {
 		  FOOD,
 		  DRINK,
 		  ACTIVITY,
-		  PRODUCTS
+		  PRODUCTS,
+		  UNAVAILABLE
 		}
 	
 	// Instance variables
@@ -14,6 +14,17 @@ public class Booth {
 	private String description;
 	private int popularity;
 	private BoothType boothType;
+	
+	/**
+	 * Constructor method for Booth object if unavailable
+	 * @param boothType Type of booth
+	 */
+	public Booth() {
+		this.name = "Unavailable";
+		this.description = "This booth is not available.";
+		this.popularity = 0;
+		this.boothType = BoothType.UNAVAILABLE;
+	}
 	
 	/**
 	 * Constructor method for Booth object
