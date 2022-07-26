@@ -13,17 +13,25 @@ public class Hungarian {
 	 */
 	public Hungarian(int[][] mainArr) {
 		// Creates a copy of mainArr
-		this.mainArr = new int[mainArr.length][mainArr.length];
+		this.mainArr = new int[mainArr[0].length][mainArr[0].length];
 		for (int i = 0; i < mainArr.length; i++) {
 			this.mainArr[i] = mainArr[i].clone();
 		}
 		numCoveredLines = 0;
 		coveredSpaces = null;
-		finalChoices = new int[mainArr.length];
+		finalChoices = new int[mainArr[0].length];
 	}
 	
 	/**
-	 * Runs the hungarian algorithm, using the data stored in this object.
+	 * Runs the Hungarian algorithm, using the data stored in this object.
+	 * Steps:
+	 * 1 - Subtract the local minimum from each row and column.
+	 * 2 - Calculate the minimum number of lines needed to cover all zeroes in the matrix.
+	 * If the number of lines required is less than the side length of the matrix, run
+	 * the following step and step 2 until the number of lines is the side length of the matrix.
+	 * 3 - Find the smallest uncovered value, subtract it from all uncovered values, and add
+	 * it to all values that are covered twice.
+	 * 4 - Extract the optimal solution from the covered zeroes.
 	 */
 	public int[] runHungarian() {
 		step1();
