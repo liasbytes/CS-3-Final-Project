@@ -1,6 +1,9 @@
 package eventManager;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+
+import eventManager.Booth.BoothType;
 
 public class Test {
 
@@ -16,6 +19,28 @@ public class Test {
 //				{27,79,	27,	93,	2,	16,	99,	19,	72,	41}};
 //		Hungarian h = new Hungarian(arr);
 //		System.out.println(Arrays.toString(h.runHungarian()));
+		
+		Booth b1 = new Booth("Ray's Food", "Description", 4, BoothType.FOOD); 
+		Booth b2 = new Booth("Mustache Milk Tea", "Description", 5, BoothType.DRINK);
+		Booth b3 = new Booth("Tornado Potato", "Description", 2, BoothType.FOOD);
+		Booth b4 = new Booth("Paella House", "Description", 3, BoothType.FOOD);
+		Booth b5 = new Booth("Live 2 Dance Bollywood", "Description", 4, BoothType.ACTIVITY);
+		Booth b6 = new Booth("Left Bank Books", "Description", 5, BoothType.PRODUCTS);
+		Booth b7 = new Booth("The Uncommon Cottage", "Description", 2, BoothType.PRODUCTS);
+		Booth b8 = new Booth("Portage Bay Goods", "Description", 1, BoothType.PRODUCTS);
+		Booth b9 = new Booth("Drip Tea", "Description", 4, BoothType.DRINK);
+		
+		ArrayList<Booth> list = new ArrayList<>();
+		list.add(b1);
+		list.add(b2);
+		list.add(b3);
+		list.add(b4);
+		list.add(b6);
+		list.add(b7);
+		list.add(b8);
+		list.add(b9);
+		
+		// Name, description, int popularity, type
 	}
 
 }
