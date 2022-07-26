@@ -9,7 +9,7 @@ import java.util.Map;
 public class SignIn extends JFrame implements ActionListener {
     private JLabel password1, label;
     private JTextField username, password;
-    private JButton logButton, signButton;
+    private JButton logButton, signButton, backButton;
 
     public SignIn() {
         JPanel panel = new JPanel();
@@ -48,7 +48,12 @@ public class SignIn extends JFrame implements ActionListener {
         signButton.setBounds(350, 260, 90, 25);
         signButton.addActionListener(this);
         panel.add(signButton);
-
+        backButton = new JButton("Back to Main Menu");
+        backButton.setFont(new Font("Arial", Font.PLAIN, 15));
+        backButton.setBounds(250, 300, 190, 25);
+        backButton.addActionListener(this);
+        panel.add(backButton);
+        
         add(panel);
         setVisible(true);
     }
