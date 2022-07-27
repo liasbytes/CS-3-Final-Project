@@ -2,4 +2,8 @@
 Test Booth
 Test Booth description
 4
-ACTIVITY
+ACTIVITY7
+
+
+3
+FOOD
