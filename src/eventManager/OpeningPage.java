@@ -104,8 +104,11 @@ class OpeningPage
 		panel.setVisible(false);
 		buttonPane.setVisible(false);
 
-		if (e.getSource() == userEvent || e.getSource() == userBooth) {
-			SignIn s = new SignIn();
+		if (e.getSource() == userEvent) {
+			SignIn s = new SignIn(true);
+			}
+		else if (e.getSource() == userBooth) {
+			SignIn s = new SignIn(false);
 			}
 		else if (e.getSource() == userVisitor) {
 	        BoothView b = new BoothView(Test.getTestBooths());
