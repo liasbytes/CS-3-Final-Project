@@ -38,19 +38,42 @@ public class Test {
 		list.add(b5);
 		list.add(b6);
 		list.add(b7);
-		//list.add(b8);
-		//list.add(b9);
+		list.add(b8);
+		list.add(b9);
 		
 		Booth[][] spots = new Booth[3][3];
-		spots[0][0] = new Booth();
-		spots[0][1] = new Booth();
 		BoothPlacer placer = new BoothPlacer(list,spots);
 		spots = placer.placeBooths();
-		for (int i = 0; i < spots.length; i++) {
-			System.out.println(Arrays.toString(spots[i]));
-		}
 		
 		// Name, description, int popularity, type
 	}
 
+	public static Booth[][] getTestBooths(){
+		Booth b1 = new Booth("Ray's Food", "Description", 4, BoothType.FOOD, 1); 
+		Booth b2 = new Booth("Mustache Milk Tea", "Description", 5, BoothType.DRINK, 2);
+		Booth b3 = new Booth("Tornado Potato", "Description", 2, BoothType.FOOD, 3);
+		Booth b4 = new Booth("Paella House", "Description", 3, BoothType.FOOD, 4);
+		Booth b5 = new Booth("Live 2 Dance Bollywood", "Description", 4, BoothType.ACTIVITY, 5);
+		Booth b6 = new Booth("Left Bank Books", "Description", 5, BoothType.PRODUCTS, 6);
+		Booth b7 = new Booth("The Uncommon Cottage", "Description", 2, BoothType.PRODUCTS, 7);
+		Booth b8 = new Booth("Portage Bay Goods", "Description", 1, BoothType.PRODUCTS, 8);
+		Booth b9 = new Booth("Drip Tea", "Description", 4, BoothType.DRINK, 9);
+		
+		ArrayList<Booth> list = new ArrayList<>();
+		list.add(b1);
+		list.add(b2);
+		list.add(b3);
+		list.add(b4);
+		list.add(b5);
+		list.add(b6);
+		list.add(b7);
+		list.add(b8);
+		//list.add(b9);
+		
+		Booth[][] spots = new Booth[3][3];
+		spots[0][0] = new Booth();
+		BoothPlacer placer = new BoothPlacer(list,spots);
+		spots = placer.placeBooths();
+		return spots;
+	}
 }

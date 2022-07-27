@@ -2,7 +2,6 @@ package eventManager;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import javax.swing.*;
 
 public class BoothView
@@ -10,43 +9,49 @@ public class BoothView
 		implements ActionListener {
 
 		// GUI Components
-		private JPanel panel, buttonPane;
-		private JLabel title, label;
+		private JPanel titlePanel, buttonPanel, boothPanel;
+		private JLabel title;
 		private JButton backButton;	
 		
-		
-		public static void boothView (ArrayList[][] data) {
-			
-			for (int r = 0; r < data.length; r++) {
-				for (int c = 0; c < data[r].length; c++) {
-					//call booth display to create booths
-				}
-			}
+		public static void main(String[] args) {
+			new BoothView(Test.getTestBooths());
 		}
 		
-		
 		/**
-		 * constructor to initialize GUI components
+		 * Constructor to initialize GUI components
+		 * 
+		 * @param data The array of booths to display
 		 */
-		public BoothView()
+		public BoothView(Booth[][] data)
 		{
-			panel = new JPanel();
-			panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 			setTitle("Booth Map");
-			setBounds(250, 150, 750, 500);
+			setBounds(250, 150, 1250, 1000);
 			setDefaultCloseOperation(EXIT_ON_CLOSE);
 			
+			titlePanel = new JPanel();
 			title = new JLabel("Booth Map");
 			title.setFont(new Font("Serif", Font.BOLD, 30));
-			title.setBorder(BorderFactory.createEmptyBorder(10,275,10,0));
-			panel.add(title);
+//			title.setBorder(BorderFactory.createEmptyBorder(10,275,10,0));
+			titlePanel.add(title);
+			add(titlePanel, BorderLayout.NORTH);
 			
+			boothPanel = new JPanel(new GridLayout(data.length, data[0].length));
+			for (int i = 0; i < data.length; i++) {
+				for (int j = 0; j < data[i].length; j++) {
+					Dimension size =  new Dimension(this.getWidth()/data.length,(this.getHeight()-30)/data[i].length);
+					boothPanel.add(new BoothDisplay(data[i][j], size));
+				}
+			}
+			add(boothPanel, BorderLayout.CENTER);
+			
+			buttonPanel = new JPanel();
 			backButton = new JButton("Back to Main Menu");
 			backButton.setFont(new Font("Serif", Font.BOLD, 17));
 			backButton.addActionListener(this);
-			panel.add(backButton);
+			backButton.setPreferredSize(new Dimension(200,30));
+			buttonPanel.add(backButton);
 			
-			add(panel);
+			add(buttonPanel, BorderLayout.SOUTH);
 			setVisible(true);
 		}
 
@@ -56,9 +61,6 @@ public class BoothView
 		 */
 		public void actionPerformed(ActionEvent e)
 		{
-			panel.setVisible(false);
-			buttonPane.setVisible(false);
-
 			if (e.getSource() == backButton) {
 	            setVisible(false);
 	            OpeningPage f = new OpeningPage();

@@ -108,7 +108,7 @@ class OpeningPage
 			SignIn s = new SignIn();
 			}
 		else if (e.getSource() == userVisitor) {
-	        BoothView b = new BoothView();
+	        BoothView b = new BoothView(Test.getTestBooths());
 		}
 	}
 }
