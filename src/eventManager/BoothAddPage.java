@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -28,6 +31,7 @@ import eventManager.Booth.BoothType;
 public class BoothAddPage implements ActionListener{
 
 	private JPanel c;
+	private JPanel mainPanel;
 	private JLabel title;
 	private JLabel name;
 	private JTextField tname;
@@ -63,15 +67,13 @@ public class BoothAddPage implements ActionListener{
 		
 		c = new JPanel(new GridBagLayout());
 		GridBagConstraints g = new GridBagConstraints();
-		c.setPreferredSize(new Dimension(400, 300));
+		c.setPreferredSize(new Dimension(frame.getX()/2, frame.getY()*3/5));
 				
 		title = new JLabel("Add a booth");
-		title.setLocation(275, 40);
 		title.setSize(300, 30);
 		title.setFont(new Font("Arial", Font.BOLD, 35));
 		
 		submit = new JButton("Submit");
-		submit.setLocation(320, 400);
 		submit.setSize(100, 30);
 		submit.addActionListener(this);
 		
@@ -80,7 +82,7 @@ public class BoothAddPage implements ActionListener{
 		popularity = new JLabel("Estimated visitor traffic (1-5):");
 		boothType = new JLabel("Type of booth: ");
 		
-		Dimension labels = new Dimension(300, 20);
+		Dimension labels = new Dimension(200, 20);
 		name.setPreferredSize(labels);
 		desc.setPreferredSize(labels);
 		popularity.setPreferredSize(labels);
@@ -141,9 +143,18 @@ public class BoothAddPage implements ActionListener{
 		g.gridy = 3;
 		c.add(tboothType, g);
 		
-		this.frame.add(title);
-		this.frame.add(submit);
-		this.frame.add(c);
+		mainPanel = new JPanel();
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setBorder(BorderFactory.createEmptyBorder(40,40,40,40));
+		mainPanel.add(Box.createGlue());
+		title.setAlignmentX(0.5f);
+		c.setAlignmentX(0.5f);
+		submit.setAlignmentX(0.5f);
+		mainPanel.add(title);
+		mainPanel.add(c);
+		mainPanel.add(submit);
+		
+		this.frame.add(mainPanel);
 		
 		
 		this.frame.setVisible(true);;
@@ -192,17 +203,18 @@ public class BoothAddPage implements ActionListener{
 			}			
 			
 			// Show thank you page
-			c.setVisible(false);
-			submit.setVisible(false);
-			title.setVisible(false);
+			mainPanel.setVisible(false);
 			this.frame.add(p);
 			p.setVisible(true);
 		}
 		
 		if (e.getSource() == boothPage) {
 			// Go to booth page
+			p.setVisible(false);
+			BoothView bf = new BoothView(Test.getTestBooths(),this.frame);
 		} else if (e.getSource() == homePage) {
 			// Go to home page
+			p.setVisible(false);
 			OpeningPage f = new OpeningPage(this.frame);
 		}
 	}
