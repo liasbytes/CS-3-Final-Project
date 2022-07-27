@@ -14,6 +14,7 @@ public class Booth {
 	private String description;
 	private int popularity;
 	private BoothType boothType;
+	private int boothID;
 	
 	/**
 	 * Constructor method for Booth object if unavailable
@@ -24,6 +25,7 @@ public class Booth {
 		this.description = "This booth is not available.";
 		this.popularity = 0;
 		this.boothType = BoothType.UNAVAILABLE;
+		this.boothID = -1;
 	}
 	
 	/**
@@ -32,12 +34,14 @@ public class Booth {
 	 * @param desc Description of booth
 	 * @param pop Estimated popularity of booth
 	 * @param boothType Type of booth
+	 * @param boothID ID of the booth
 	 */
-	public Booth(String name, String desc, int pop, BoothType boothType ) {
+	public Booth(String name, String desc, int pop, BoothType boothType, int boothID ) {
 		this.name = name;
 		this.description = desc;
 		this.popularity = pop;
 		this.boothType = boothType;
+		this.boothID = boothID;
 	}
 	
 	// Getter methods
@@ -74,6 +78,14 @@ public class Booth {
 		return this.boothType;
 	}
 	
+	/**
+	 * BoothID accessor
+	 * @return ID of booth
+	 */
+	public int boothID() {
+		return this.boothID;
+	}
+	
 	// Setter methods
 	
 	/**
@@ -108,14 +120,19 @@ public class Booth {
 		this.boothType = b;
 	}
 	
+	public void setBoothID(int b) {
+		this.boothID = b;
+	}
+	
 	/**
 	 * Textual representation of Booth object
 	 * @return a String with all Booth information
 	 */
 	public String toString() {
 		return this.name + ": " 
-				+ this.description + "/n" 
+				+ this.description + " - " 
 				+ this.popularity + " - " 
-				+ this.boothType;
+				+ this.boothType + "ID:" 
+				+ this.boothID;
 	}
 }
