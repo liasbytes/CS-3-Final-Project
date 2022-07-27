@@ -12,11 +12,14 @@ public class SignIn extends JFrame implements ActionListener {
     private JPasswordField password;
     private JButton logButton, signButton, backButton;
     private JFrame frame;
+    private boolean OrganizerOrNot;
 
     /**
      * Constructor method for instance variables
      */
-    public SignIn() {
+    public SignIn(boolean OrganizerOrNot) {
+    	
+    	this.OrganizerOrNot = OrganizerOrNot;
         JPanel panel = new JPanel();
         frame = new JFrame();
         setTitle("Event Manager");
@@ -85,13 +88,21 @@ public class SignIn extends JFrame implements ActionListener {
         Map<String, String> map = new HashMap<>();
         if (e.getSource() == logButton) {
             if (map.containsKey(data2)) {
-                if (map.get(data2).equals(data) && !data.equals("") && !data2.equals(""))
-                    getBooth();
+            	if (!data.equals("") && !data2.equals("")) {
+                	if (OrganizerOrNot == false)
+                        getBooth();
+                	else
+                		getOrganizer();
+                }
             }
         } else if (e.getSource() == signButton) {
             map.put(data2, data);
-            if (!data.equals("") && !data2.equals(""))
-                getBooth();
+            if (!data.equals("") && !data2.equals("")) {
+            	if (OrganizerOrNot == false)
+                    getBooth();
+            	else
+            		getOrganizer();
+            }
             String def = "";
             username.setText(def);
             password.setText(def);
@@ -102,22 +113,18 @@ public class SignIn extends JFrame implements ActionListener {
     }
 
     /**
-     * Getting booth panel
+     * Getting booth holder panel
      */
     public static void getBooth() {
         BoothAddPage b = new BoothAddPage(1);
         // Note from Emily: You have to add a number for the Booth ID, now
     }
-}
-
-class Tester {
+    
     /**
-     * Main method
-     * 
-     * @param args console input
-     * @throws Exception
+     * Getting booth organizer panel
      */
-    public static void main(String[] args) throws Exception {
-        SignIn s = new SignIn();
+    public static void getOrganizer() {
+        BoothOrganizer b = new BoothOrganizer();
+        // Note from Emily: You have to add a number for the Booth ID, now
     }
 }
