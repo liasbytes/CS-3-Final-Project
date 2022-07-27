@@ -5,24 +5,22 @@ import java.awt.*;
 import java.awt.event.*;
 
 class OpeningPage
-	extends JFrame
 	implements ActionListener {
 
 	// Components
 	private JPanel panel, buttonPane;
 	private JLabel title, label;
 	private JButton userEvent, userBooth, userVisitor, map;	
+	private JFrame frame;
 	
 	/**
 	 * constructor to initialize components
 	 */
-	public OpeningPage()
+	public OpeningPage(JFrame frame)
 	{
+		this.frame = frame;
 		panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-		setTitle("Event Manager");
-		setBounds(250, 150, 750, 500);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		title = new JLabel("Event Manager");
 		title.setFont(new Font("Serif", Font.BOLD, 30));
@@ -84,10 +82,9 @@ class OpeningPage
 		buttonPane.add(userBooth);
 		buttonPane.add(Box.createRigidArea(new Dimension(50, 0)));
 		buttonPane.add(userVisitor);
-		add(buttonPane, BorderLayout.PAGE_END);
+		this.frame.add(buttonPane, BorderLayout.PAGE_END);
 		
-		add(panel);
-		setVisible(true);
+		this.frame.add(panel);
 
 		map = new JButton("Map");
 		map.addActionListener(this);
@@ -105,13 +102,13 @@ class OpeningPage
 		buttonPane.setVisible(false);
 
 		if (e.getSource() == userEvent) {
-			SignIn s = new SignIn(true);
+			SignIn s = new SignIn(true, this.frame);
 			}
 		else if (e.getSource() == userBooth) {
-			SignIn s = new SignIn(false);
+			SignIn s = new SignIn(false, this.frame);
 			}
 		else if (e.getSource() == userVisitor) {
-	        BoothView b = new BoothView(Test.getTestBooths());
+	        BoothView b = new BoothView(Test.getTestBooths(), this.frame);
 		}
 	}
 }

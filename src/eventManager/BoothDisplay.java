@@ -46,13 +46,13 @@ public class BoothDisplay extends JPanel{
 			name = new JLabel(b.getName());
 			name.setFont(bold);
 			name.setAlignmentX(0);
-			name.setPreferredSize(new Dimension(d.width,d.height/5));
+			name.setPreferredSize(new Dimension(d.width,30));
 			this.add(name);
 			
 			description = new JTextArea(b.getDescription());
 			description.setFont(italic);
 			description.setAlignmentX(0);
-			description.setMaximumSize(new Dimension(d.width,(d.height*3)/5));
+			description.setMaximumSize(new Dimension(d.width,d.height-55));
 			description.setLineWrap(true);
 			description.setEditable(false);
 			this.add(description);
@@ -64,7 +64,7 @@ public class BoothDisplay extends JPanel{
 			boothType = new JLabel(type);
 			boothType.setFont(italic);
 			boothType.setAlignmentX(0);
-			boothType.setPreferredSize(new Dimension(d.width,d.height/5));
+			boothType.setPreferredSize(new Dimension(d.width,25));
 			this.add(boothType);
 			
 			if (b.boothType() == Booth.BoothType.FOOD) {

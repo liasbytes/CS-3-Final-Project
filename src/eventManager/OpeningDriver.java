@@ -1,6 +1,8 @@
 package eventManager;
 
-public class OpeningDriver {
+import javax.swing.JFrame;
+
+public class OpeningDriver{
 
 	/**
 	 * creates new OpeningPage class
@@ -8,7 +10,13 @@ public class OpeningDriver {
 	 */
 	public static void main(String[] args) throws Exception
 	{
-		OpeningPage f = new OpeningPage();
+		JFrame mainFrame = new JFrame();
+		mainFrame.setTitle("Event Organizer");
+		mainFrame.setResizable(false);
+		mainFrame.setBounds(250,250,1000,750);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setVisible(true);
+		OpeningPage f = new OpeningPage(mainFrame);
 	}
 	
 }

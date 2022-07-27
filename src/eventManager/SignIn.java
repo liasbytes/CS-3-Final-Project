@@ -6,26 +6,22 @@ import java.awt.event.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SignIn extends JFrame implements ActionListener {
+public class SignIn implements ActionListener {
     private JLabel title, password1, label;
     private JTextField username;
     private JPasswordField password;
     private JButton logButton, signButton, backButton;
     private JFrame frame;
+    private JPanel panel;
     private boolean OrganizerOrNot;
 
     /**
      * Constructor method for instance variables
      */
-    public SignIn(boolean OrganizerOrNot) {
-    	
+    public SignIn(boolean OrganizerOrNot, JFrame frame) {
+    	this.frame = frame;
     	this.OrganizerOrNot = OrganizerOrNot;
-        JPanel panel = new JPanel();
-        frame = new JFrame();
-        setTitle("Event Manager");
-        setBounds(250, 150, 750, 500);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.add(panel);
+        panel = new JPanel();
 
         panel.setLayout(null);
 
@@ -72,8 +68,7 @@ public class SignIn extends JFrame implements ActionListener {
         backButton.addActionListener(this);
         panel.add(backButton);
 
-        add(panel);
-        setVisible(true);
+        this.frame.add(panel);
     }
 
     /**
@@ -107,24 +102,25 @@ public class SignIn extends JFrame implements ActionListener {
             username.setText(def);
             password.setText(def);
         } else if (e.getSource() == backButton) {
-            frame.setVisible(false);
-            OpeningPage f = new OpeningPage();
+            panel.setVisible(false);
+            OpeningPage f = new OpeningPage(this.frame);
         }
     }
 
     /**
      * Getting booth holder panel
      */
-    public static void getBooth() {
-        BoothAddPage b = new BoothAddPage(1);
+    public void getBooth() {
+    	panel.setVisible(false);
+        BoothAddPage b = new BoothAddPage(1, this.frame);
         // Note from Emily: You have to add a number for the Booth ID, now
     }
     
     /**
      * Getting booth organizer panel
      */
-    public static void getOrganizer() {
-        BoothOrganizer b = new BoothOrganizer();
+    public void getOrganizer() {
+        //BoothOrganizer b = new BoothOrganizer();
         // Note from Emily: You have to add a number for the Booth ID, now
     }
 }

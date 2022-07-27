@@ -25,7 +25,7 @@ import javax.swing.UIManager;
 
 import eventManager.Booth.BoothType;
 
-public class BoothAddPage extends JFrame implements ActionListener{
+public class BoothAddPage implements ActionListener{
 
 	private JPanel c;
 	private JLabel title;
@@ -44,29 +44,22 @@ public class BoothAddPage extends JFrame implements ActionListener{
 	private JButton boothPage;
 	private JButton homePage;
 	
+	private JFrame frame;
+	
 	private int boothID;
 	
 	private BoothType types[]
 			= { BoothType.ACTIVITY, BoothType.DRINK, BoothType.FOOD, BoothType.PRODUCTS, BoothType.UNAVAILABLE};
 	
-	public static void main(String[] args) {
-		BoothAddPage p = new BoothAddPage(7);
-	}
-	
 	/**
 	 * Creates Booth Add Page
 	 * @param boothID ID of the booth, should match account ID
 	 */
-	public BoothAddPage(int boothID) {
+	public BoothAddPage(int boothID, JFrame frame) {
+		this.frame = frame;
 		this.boothID = boothID;
 		
 		UIManager.put("Label.font", new Font("Arial", Font.PLAIN, 14));
-
-
-		setBounds(250, 150, 750, 500);
-		setTitle("Add your booth");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
 		
 		c = new JPanel(new GridBagLayout());
 		GridBagConstraints g = new GridBagConstraints();
@@ -100,7 +93,7 @@ public class BoothAddPage extends JFrame implements ActionListener{
 		npopularity = new JSlider(1, 5, 3);
 		npopularity.setMajorTickSpacing(1);
 		npopularity.setMinorTickSpacing(1);
-		npopularity.setPaintLabels(isEnabled());
+		npopularity.setPaintLabels(this.frame.isEnabled());
 		
 		
 		String[] typesString = Arrays.toString(BoothType.values()).replaceAll("^.|.$", "").split(", ");
@@ -148,12 +141,12 @@ public class BoothAddPage extends JFrame implements ActionListener{
 		g.gridy = 3;
 		c.add(tboothType, g);
 		
-		add(title);
-		add(submit);
-		add(c);
+		this.frame.add(title);
+		this.frame.add(submit);
+		this.frame.add(c);
 		
 		
-		setVisible(true);
+		this.frame.setVisible(true);;
 		
 		// Thank you page
 		p = new JPanel(new GridBagLayout());
@@ -202,7 +195,7 @@ public class BoothAddPage extends JFrame implements ActionListener{
 			c.setVisible(false);
 			submit.setVisible(false);
 			title.setVisible(false);
-			add(p);
+			this.frame.add(p);
 			p.setVisible(true);
 		}
 		
@@ -210,8 +203,7 @@ public class BoothAddPage extends JFrame implements ActionListener{
 			// Go to booth page
 		} else if (e.getSource() == homePage) {
 			// Go to home page
-			OpeningPage f = new OpeningPage();
-			setVisible(false);
+			OpeningPage f = new OpeningPage(this.frame);
 		}
 	}
 	

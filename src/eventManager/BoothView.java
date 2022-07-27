@@ -5,44 +5,39 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class BoothView
-		extends JFrame
 		implements ActionListener {
 
 		// GUI Components
-		private JPanel titlePanel, buttonPanel, boothPanel;
+		private JPanel mainPanel, buttonPanel, boothPanel;
 		private JLabel title;
 		private JButton backButton;	
+		private JFrame frame;
 		
-		public static void main(String[] args) {
-			new BoothView(Test.getTestBooths());
-		}
 		
 		/**
 		 * Constructor to initialize GUI components
 		 * 
 		 * @param data The array of booths to display
 		 */
-		public BoothView(Booth[][] data)
+		public BoothView(Booth[][] data, JFrame frame)
 		{
-			setTitle("Booth Map");
-			setBounds(250, 150, 1250, 1000);
-			setDefaultCloseOperation(EXIT_ON_CLOSE);
+			this.frame = frame;
 			
-			titlePanel = new JPanel();
+			mainPanel = new JPanel();
+			mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
 			title = new JLabel("Booth Map");
 			title.setFont(new Font("Serif", Font.BOLD, 30));
-//			title.setBorder(BorderFactory.createEmptyBorder(10,275,10,0));
-			titlePanel.add(title);
-			add(titlePanel, BorderLayout.NORTH);
+			title.setAlignmentX(0.5f);
+			mainPanel.add(title);
 			
 			boothPanel = new JPanel(new GridLayout(data.length, data[0].length));
 			for (int i = 0; i < data.length; i++) {
 				for (int j = 0; j < data[i].length; j++) {
-					Dimension size =  new Dimension(this.getWidth()/data.length,(this.getHeight()-30)/data[i].length);
+					Dimension size =  new Dimension(this.frame.getWidth()/data.length,(this.frame.getHeight()-100)/data[i].length);
 					boothPanel.add(new BoothDisplay(data[i][j], size));
 				}
 			}
-			add(boothPanel, BorderLayout.CENTER);
+			mainPanel.add(boothPanel);
 			
 			buttonPanel = new JPanel();
 			backButton = new JButton("Back to Main Menu");
@@ -50,9 +45,9 @@ public class BoothView
 			backButton.addActionListener(this);
 			backButton.setPreferredSize(new Dimension(200,30));
 			buttonPanel.add(backButton);
+			mainPanel.add(buttonPanel);
 			
-			add(buttonPanel, BorderLayout.SOUTH);
-			setVisible(true);
+			this.frame.add(mainPanel, BorderLayout.CENTER);
 		}
 
 		/**
@@ -62,8 +57,10 @@ public class BoothView
 		public void actionPerformed(ActionEvent e)
 		{
 			if (e.getSource() == backButton) {
-	            setVisible(false);
-	            OpeningPage f = new OpeningPage();
+	            mainPanel.setVisible(false);
+	            boothPanel.setVisible(false);
+	            buttonPanel.setVisible(false);
+	            OpeningPage f = new OpeningPage(this.frame);
 	        }
 		}
 }
