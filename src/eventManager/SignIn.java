@@ -105,7 +105,8 @@ public class SignIn extends JFrame implements ActionListener {
      * Getting booth panel
      */
     public static void getBooth() {
-        BoothAddPage b = new BoothAddPage();
+        BoothAddPage b = new BoothAddPage(1);
+        // Note from Emily: You have to add a number for the Booth ID, now
     }
 }
 

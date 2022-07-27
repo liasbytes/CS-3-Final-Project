@@ -7,6 +7,10 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Arrays;
 
 import javax.swing.JButton;
@@ -35,19 +39,26 @@ public class BoothAddPage extends JFrame implements ActionListener{
 	private JComboBox tboothType;
 	private JButton submit;
 	
-	public JPanel p;
-	public JLabel thankYou;
-	public JButton boothPage;
-	public JButton homePage;
+	private JPanel p;
+	private JLabel thankYou;
+	private JButton boothPage;
+	private JButton homePage;
+	
+	private int boothID;
 	
 	private BoothType types[]
 			= { BoothType.ACTIVITY, BoothType.DRINK, BoothType.FOOD, BoothType.PRODUCTS, BoothType.UNAVAILABLE};
 	
 	public static void main(String[] args) {
-		BoothAddPage p = new BoothAddPage();
+		BoothAddPage p = new BoothAddPage(7);
 	}
 	
-	public BoothAddPage() {
+	/**
+	 * Creates Booth Add Page
+	 * @param boothID ID of the booth, should match account ID
+	 */
+	public BoothAddPage(int boothID) {
+		this.boothID = boothID;
 		
 		UIManager.put("Label.font", new Font("Arial", Font.PLAIN, 14));
 
@@ -85,6 +96,7 @@ public class BoothAddPage extends JFrame implements ActionListener{
 		
 		tname = new JTextField();
 		tdesc = new JTextArea();
+		tdesc.setLineWrap(true);
 		npopularity = new JSlider(1, 5, 3);
 		npopularity.setMajorTickSpacing(1);
 		npopularity.setMinorTickSpacing(1);
@@ -150,6 +162,9 @@ public class BoothAddPage extends JFrame implements ActionListener{
 		boothPage = new JButton("Go to booth page");
 		homePage = new JButton("Go to home page");
 		
+		boothPage.addActionListener(this);
+		homePage.addActionListener(this);
+		
 		g.gridy = 0;
 		p.add(thankYou, g);
 		g.gridy = 1;
@@ -162,8 +177,26 @@ public class BoothAddPage extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == submit) {
-			//Store as a Booth object
-			
+			Writer fw = null;
+			// Add info to file
+			try {
+				fw = new FileWriter(new File("src/booth-data.txt"), true);
+	        	// Written in format: ID Name Desc Popularity Type
+				fw.write(String.valueOf(this.boothID));
+	        	fw.write(String.format("%n"));
+				fw.write(tname.getText());
+				fw.write(String.format("%n"));
+				fw.write(tdesc.getText());
+				fw.write(String.format("%n"));
+				fw.write(String.valueOf(npopularity.getValue()));
+				fw.write(String.format("%n"));
+				fw.write(String.valueOf(tboothType.getSelectedItem()));
+				fw.write(String.format("%n"));
+				fw.close();
+
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}			
 			
 			// Show thank you page
 			c.setVisible(false);
@@ -171,11 +204,14 @@ public class BoothAddPage extends JFrame implements ActionListener{
 			title.setVisible(false);
 			add(p);
 			p.setVisible(true);
-		} if (e.getSource() == boothPage) {
-			
+		}
+		
+		if (e.getSource() == boothPage) {
+			// Go to booth page
 		} else if (e.getSource() == homePage) {
+			// Go to home page
+			OpeningPage f = new OpeningPage();
 			setVisible(false);
-    		OpeningPage f = new OpeningPage();
 		}
 	}
 	
