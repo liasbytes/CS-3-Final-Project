@@ -182,6 +182,7 @@ public class BoothAddPage extends JFrame implements ActionListener{
 			try {
 				fw = new FileWriter(new File("src/booth-data.txt"), true);
 	        	// Written in format: ID Name Desc Popularity Type
+				fw.write(String.format("%n"));
 				fw.write(String.valueOf(this.boothID));
 	        	fw.write(String.format("%n"));
 				fw.write(tname.getText());
@@ -191,7 +192,6 @@ public class BoothAddPage extends JFrame implements ActionListener{
 				fw.write(String.valueOf(npopularity.getValue()));
 				fw.write(String.format("%n"));
 				fw.write(String.valueOf(tboothType.getSelectedItem()));
-				fw.write(String.format("%n"));
 				fw.close();
 
 			} catch (IOException e1) {

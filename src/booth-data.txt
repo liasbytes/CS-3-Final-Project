@@ -3,3 +3,13 @@ Test Booth
 Test Booth description
 4
 ACTIVITY
+7
+Menchie's
+Ice cream and frozen yogurt shop
+4
+FOOD
+7
+Blueberry Stand
+Buy fresh blueberries
+5
+FOOD
