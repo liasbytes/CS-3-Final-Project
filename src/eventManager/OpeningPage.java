@@ -1,4 +1,5 @@
 package eventManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -8,100 +9,89 @@ class OpeningPage
 	implements ActionListener {
 
 	// Components
-	private Container c;
-	private JLabel title;
-	private JLabel label;
-	private JTextField iD;
-	private JButton userEvent;
-	private JButton userBooth;
-	private JButton userVisitor;
-	private JButton map;
-	
+	private JPanel panel, buttonPane;
+	private JLabel title, label;
+	private JButton userEvent, userBooth, userVisitor, map;	
 	
 	/**
 	 * constructor to initialize components
 	 */
 	public OpeningPage()
 	{
+		panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		setTitle("Event Manager");
 		setBounds(250, 150, 750, 500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
-
-		c = getContentPane();
-		c.setLayout(null);
-
+		
 		title = new JLabel("Event Manager");
 		title.setFont(new Font("Serif", Font.BOLD, 30));
-		title.setSize(300, 50);
-		title.setLocation(275, 20);
-		c.add(title);
+		title.setBorder(BorderFactory.createEmptyBorder(10,275,10,0));
+		panel.add(title);
 
-		label = new JLabel("Hello, welcome to Event Manager! This program enables the user");
+		label = new JLabel("Hello, and welcome to Event Manager! "
+				+ "This program enables the user to view and/or");
 		label.setFont(new Font("Serif", Font.PLAIN, 20));
-		label.setSize(575, 25);
-		label.setLocation(100, 80);
-		c.add(label);
+		label.setBorder(BorderFactory.createEmptyBorder(0,30,0,0));
+		panel.add(label);
 		
-		label = new JLabel("to view and/or manage information regarding event booths.");
+		label = new JLabel("manage information regarding event booths. Below are the available user roles: ");
 		label.setFont(new Font("Serif", Font.PLAIN, 20));
-		label.setSize(575, 25);
-		label.setLocation(100, 105);
-		c.add(label);
+		label.setBorder(BorderFactory.createEmptyBorder(0,30,0,0));
+		panel.add(label);
 		
 		label = new JLabel("Event organizer: manages all booth placement.");
 		label.setFont(new Font("Serif", Font.PLAIN, 20));
-		label.setSize(575, 25);
-		label.setLocation(100, 150);
-		c.add(label);
+		label.setBorder(BorderFactory.createEmptyBorder(15,30,0,0));
+		panel.add(label);
 		
 		label = new JLabel("Booth holders: set up their booths with booth information.");
 		label.setFont(new Font("Serif", Font.PLAIN, 20));
-		label.setSize(575, 25);
-		label.setLocation(100, 180);
-		c.add(label);
+		label.setBorder(BorderFactory.createEmptyBorder(5,30,0,0));
+		panel.add(label);
 		
 		label = new JLabel("Visitors: view an overview of event and layout of all event booths.");
 		label.setFont(new Font("Serif", Font.PLAIN, 20));
-		label.setSize(575, 25);
-		label.setLocation(100, 210);
-		c.add(label);
+		label.setBorder(BorderFactory.createEmptyBorder(5,30,5,0));
+		panel.add(label);
 		
 		label = new JLabel("How would you like to proceed?");
 		label.setFont(new Font("Serif", Font.PLAIN, 20));
-		label.setSize(450, 25);
-		label.setLocation(100, 250);
-		c.add(label);
-
+		label.setBorder(BorderFactory.createEmptyBorder(10,30,0,0));
+		panel.add(label);
+		
 		userEvent = new JButton("Event Organizer");
 		userEvent.setFont(new Font("Serif", Font.BOLD, 17));
-		userEvent.setSize(170, 30);
-		userEvent.setLocation(100, 300);
 		userEvent.addActionListener(this);
-		c.add(userEvent);
+		panel.add(userEvent);
 		
-
 		userBooth = new JButton("Booth Holder");
 		userBooth.setFont(new Font("Serif", Font.BOLD, 17));
-		userBooth.setSize(170, 30);
-		userBooth.setLocation(300, 300);
 		userBooth.addActionListener(this);
-		c.add(userBooth);
+		panel.add(userBooth);
 				
 		userVisitor = new JButton("Event Visitor");
 		userVisitor.setFont(new Font("Serif", Font.BOLD, 17));
-		userVisitor.setSize(170, 30);
-		userVisitor.setLocation(500, 300);
 		userVisitor.addActionListener(this);
-		c.add(userVisitor);
+		panel.add(userVisitor);
 		
+		buttonPane = new JPanel();
+		buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
+		buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 120, 110));
+		buttonPane.add(Box.createHorizontalGlue());
+		buttonPane.add(userEvent);
+		buttonPane.add(Box.createRigidArea(new Dimension(50, 0)));
+		buttonPane.add(userBooth);
+		buttonPane.add(Box.createRigidArea(new Dimension(50, 0)));
+		buttonPane.add(userVisitor);
+		add(buttonPane, BorderLayout.PAGE_END);
+		
+		add(panel);
 		setVisible(true);
 
 		map = new JButton("Map");
-		map.setSize(635, 350);
-		map.setLocation(50, 80);
 		map.addActionListener(this);
-		c.add(map);
+		panel.add(map);
 		map.setVisible(false);
 	}
 
@@ -111,14 +101,13 @@ class OpeningPage
 	 */
 	public void actionPerformed(ActionEvent e)
 	{
-		if (e.getSource() == userEvent) {
-		
+		panel.setVisible(false);
+		buttonPane.setVisible(false);
+
+		if (e.getSource() == userEvent || e.getSource() == userBooth) {
+			SignIn s = new SignIn();
 			}
 		else if (e.getSource() == userVisitor) {
-			map.setVisible(true);
-			userEvent.setVisible(false);
-			userBooth.setVisible(false);
-			userVisitor.setVisible(false);
 		}
 	}
 }

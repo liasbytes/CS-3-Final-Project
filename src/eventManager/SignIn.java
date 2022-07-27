@@ -10,10 +10,11 @@ public class SignIn extends JFrame implements ActionListener {
     private JLabel password1, label;
     private JTextField username, password;
     private JButton logButton, signButton, backButton;
+    private JFrame frame;
 
     public SignIn() {
         JPanel panel = new JPanel();
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         setTitle("Event Manager");
         setBounds(250, 150, 750, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -65,16 +66,25 @@ public class SignIn extends JFrame implements ActionListener {
         Map<String, String> map = new HashMap<>();
         if (e.getSource() == logButton) {
             for (int i = 0; i < map.size(); i++) {
-                if (map.get(data2) == data) {
-
-                }
+                if (map.get(data2) == data && !data.equals("") && !data2.equals(""))
+                	getBooth();
             }
         } else if (e.getSource() == signButton) {
             map.put(data2, data);
+            if (!data.equals("") && !data2.equals(""))
+            	getBooth();
             String def = "";
             username.setText(def);
             password.setText(def);
         }
+        else if (e.getSource() == backButton) {
+            frame.setVisible(false);
+    		OpeningPage f = new OpeningPage();
+        }
+    }
+    
+    public static void getBooth() {
+    	BoothAddPage b = new BoothAddPage();
     }
 }
 

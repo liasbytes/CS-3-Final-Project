@@ -171,6 +171,11 @@ public class BoothAddPage extends JFrame implements ActionListener{
 			title.setVisible(false);
 			add(p);
 			p.setVisible(true);
+		} if (e.getSource() == boothPage) {
+			
+		} else if (e.getSource() == homePage) {
+			setVisible(false);
+    		OpeningPage f = new OpeningPage();
 		}
 	}
 	
