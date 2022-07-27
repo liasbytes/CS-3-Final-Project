@@ -1,9 +1,0 @@
-1
-Test Booth
-Test Booth description
-4
-ACTIVITY7
-
-
-3
-FOOD
