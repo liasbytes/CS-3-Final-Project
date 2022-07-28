@@ -126,14 +126,13 @@ public class SignIn implements ActionListener {
     public void getBooth() {
     	panel.setVisible(false);
         BoothAddPage b = new BoothAddPage(1, this.frame);
-        // Note from Emily: You have to add a number for the Booth ID, now
     }
     
     /**
-     * Getting booth organizer panel
+     * Getting event organizer panel
      */
     public void getOrganizer() {
-        //BoothOrganizer b = new BoothOrganizer();
-        // Note from Emily: You have to add a number for the Booth ID, now
+    	panel.setVisible(false);
+    	Organizer b = new Organizer(this.frame);
     }
 }
