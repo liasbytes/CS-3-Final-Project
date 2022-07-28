@@ -188,6 +188,7 @@ public class BoothAddPage implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == submit) {
+        	if (!(tname.getText()).equals("") && !(tdesc.getText()).equals("")) {
 			Writer fw = null;
 			// Add info to file
 			try {
@@ -213,6 +214,7 @@ public class BoothAddPage implements ActionListener{
 			mainPanel.setVisible(false);
 			this.frame.add(p);
 			p.setVisible(true);
+        	}
 		} else if (e.getSource() == back) {
 			mainPanel.setVisible(false);
 			OpeningPage f = new OpeningPage(this.frame);

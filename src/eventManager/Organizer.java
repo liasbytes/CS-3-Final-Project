@@ -39,7 +39,6 @@ class Organizer
 		deletePanel = new JPanel(new GridBagLayout());
 		deletePanel.setLayout(new javax.swing.BoxLayout(deletePanel, javax.swing.BoxLayout.Y_AXIS));
 		deletePanel.setPreferredSize(new Dimension(frame.getX()/2, frame.getY()*3/5));
-		GridBagConstraints g = new GridBagConstraints();
 
 		panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
