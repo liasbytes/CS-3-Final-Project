@@ -30,17 +30,19 @@ public class BoothReading {
         ArrayList<Booth> boothData = new ArrayList<>();
         try {
             scan = new Scanner(new File(fileName));
-            while (scan.hasNext()) {
+            while (scan.hasNextLine()) {
                 String boothName = scan.nextLine();
                 String boothDesc = scan.nextLine();
                 int popLvl = scan.nextInt();
+                scan.nextLine();
                 BoothType bType = BoothType.valueOf(scan.nextLine().toUpperCase());
                 int curBoothId = scan.nextInt();
-                boothData.add(
-                        new Booth(boothName, boothDesc, popLvl, bType, curBoothId));
+                scan.nextLine();
+                System.out.println(boothName+boothDesc+popLvl+bType+curBoothId);
+                boothData.add(new Booth(boothName, boothDesc, popLvl, bType, curBoothId));
             }
         } catch (Exception e) {
-
+        	e.printStackTrace();
         }
         return boothData;
     }
