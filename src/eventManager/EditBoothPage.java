@@ -62,16 +62,6 @@ public class EditBoothPage implements ActionListener{
 	private BoothType types[]
 			= { BoothType.ACTIVITY, BoothType.DRINK, BoothType.FOOD, BoothType.PRODUCTS, BoothType.UNAVAILABLE};
 	
-	public static void main(String[] args) {
-		JFrame mainFrame = new JFrame();
-		mainFrame.setTitle("Event Organizer");
-		mainFrame.setResizable(false);
-		mainFrame.setBounds(250,250,1000,750);
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setVisible(true);
-		EditBoothPage o = new EditBoothPage(13, mainFrame);
-	}
-	
 	/**
 	 * Creates Booth Add Page
 	 * @param boothID ID of the booth, should match account ID

@@ -7,16 +7,6 @@ import eventManager.Booth.BoothType;
 import java.io.*;
 
 public class BoothReading {
-
-    /**
-     * Main method which calls readFile method
-     * 
-     * @param args console input
-     */
-    public static void main(String[] args) {
-        System.out.println(readFile("src/booth-data.txt"));
-    }
-
     /**
      * Reads the file and adds booth data into an object, which is added into an
      * arraylist
