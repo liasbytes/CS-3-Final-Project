@@ -139,7 +139,6 @@ class Organizer
 				        }
 					        oldContent = oldContent + line + System.lineSeparator();
 					        line = reader.readLine();
-					        
 					}
 					reader.close();
 					if (found == true) {

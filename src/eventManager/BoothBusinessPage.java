@@ -27,7 +27,7 @@ import javax.swing.UIManager;
 
 public class BoothBusinessPage implements ActionListener{
 
-	private JPanel g;
+	private JPanel g, p;
 	private int boothID;
 	private JLabel title;
 	private JButton editBooth;
@@ -54,7 +54,7 @@ public class BoothBusinessPage implements ActionListener{
 		GridBagConstraints c = new GridBagConstraints();
 		
 		// Label: Booth Page
-		JPanel p = new JPanel();
+		p = new JPanel();
 		title = new JLabel("Manage your booth");
 		title.setFont(new Font("Arial", Font.BOLD, 50));
 		p.setBorder(BorderFactory.createEmptyBorder(50,10,10,10));
@@ -167,7 +167,7 @@ public class BoothBusinessPage implements ActionListener{
 	}
 	
 	private void disableComponents() {
-		title.setVisible(false);
+		p.setVisible(false);
 		g.setVisible(false);
 	}
 	

@@ -236,9 +236,7 @@ public class EditBoothPage implements ActionListener{
 					
 					if (found == true) {
 						fw = new FileWriter((tbm), false);
-						System.out.println(oldContent);
 						String newContent = oldContent.replaceAll(oldString, newString);
-						System.out.println(newContent);
 						fw.write(newContent);				
 						fw.close();
 					} else {
