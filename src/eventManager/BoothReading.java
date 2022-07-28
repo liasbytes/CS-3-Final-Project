@@ -30,13 +30,13 @@ public class BoothReading {
         try {
             scan = new Scanner(new File(fileName));
             while (scan.hasNextLine()) {
+            	int curBoothId = scan.nextInt();
+                scan.nextLine();
                 String boothName = scan.nextLine();
                 String boothDesc = scan.nextLine();
                 int popLvl = scan.nextInt();
                 scan.nextLine();
                 BoothType bType = BoothType.valueOf(scan.nextLine().toUpperCase());
-                int curBoothId = scan.nextInt();
-                scan.nextLine();
                 boothData.add(new Booth(boothName, boothDesc, popLvl, bType, curBoothId));
             }
         } catch (Exception e) {

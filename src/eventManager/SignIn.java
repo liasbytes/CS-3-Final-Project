@@ -21,8 +21,8 @@ public class SignIn implements ActionListener {
     private boolean OrganizerOrNot;
     private Map<String, Account> accounts;
     
-    private final static String BOOTH_ACCOUNT_PATH = "booth-accounts.txt";
-    private final static String ORGANIZER_ACCOUNT_PATH = "organizer-accounts.txt";
+    public final static String BOOTH_ACCOUNT_PATH = "booth-accounts.txt";
+    public final static String ORGANIZER_ACCOUNT_PATH = "organizer-accounts.txt";
     private static int currentID;
 
     /**
@@ -113,8 +113,10 @@ public class SignIn implements ActionListener {
         	}
             if (accounts.containsKey(data)) {
             	if (!data.equals("") && !data2.equals("")) {
-                	if (OrganizerOrNot == false)
-                        getBooth(accounts.get(data).ID);
+                	if (OrganizerOrNot == false) {
+                		panel.setVisible(false);
+                		BoothBusinessPage bp = new BoothBusinessPage(accounts.get(data).ID, this.frame);
+                	}
                 	else
                 		getOrganizer();
                 }
@@ -178,11 +180,11 @@ public class SignIn implements ActionListener {
     		for (String username : accounts.keySet()) {
     			String password = accounts.get(username).password;
     			int accountID = accounts.get(username).ID;
+    			fw.write(String.valueOf(accountID));
+    			fw.write(String.format("%n"));
     			fw.write(username);
     			fw.write(String.format("%n"));
     			fw.write(password);
-    			fw.write(String.format("%n"));
-    			fw.write(String.valueOf(accountID));
     			fw.write(String.format("%n"));
     		}
     		fw.close();
@@ -207,15 +209,5 @@ public class SignIn implements ActionListener {
     	Organizer b = new Organizer(this.frame);
     }
     
-    private class Account {
-    	String username;
-    	String password;
-    	int ID;
-    	
-    	private Account(String username, String password, int ID) {
-    		this.username = username;
-    		this.password = password;
-    		this.ID = ID;
-    	}
-    }
+    
 }

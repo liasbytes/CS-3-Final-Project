@@ -1,5 +1,6 @@
 package eventManager;
 
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -8,11 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.HashMap;
+import java.util.Scanner;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,7 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-public class BoothBusinessPage extends JFrame implements ActionListener{
+public class BoothBusinessPage implements ActionListener{
 
 	private JPanel g;
 	private int boothID;
@@ -29,6 +34,9 @@ public class BoothBusinessPage extends JFrame implements ActionListener{
 	private JButton deleteBooth;
 	private JButton returnHome;
 	private JFrame frame;
+	
+	private HashMap<Integer, Account> accounts;
+	private int currentID;
 	
 	/**
 	 * Creates the main Booth page for businesses, allowing them to edit or delete their booth.
@@ -39,20 +47,18 @@ public class BoothBusinessPage extends JFrame implements ActionListener{
 		this.frame = frame;
 		
 		UIManager.put("Label.font", new Font("Arial", Font.PLAIN, 14));
-		setBounds(250, 150, 750, 500);
-		setTitle("Manage your booth");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
+		frame.setTitle("Manage your booth");
 		
 		g = new JPanel();
 		g.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
 		// Label: Booth Page
+		JPanel p = new JPanel();
 		title = new JLabel("Manage your booth");
-		title.setLocation(200, 50);
-		title.setSize(400, 50);
-		title.setFont(new Font("Arial", Font.BOLD, 35));
+		title.setFont(new Font("Arial", Font.BOLD, 50));
+		p.setBorder(BorderFactory.createEmptyBorder(50,10,10,10));
+		p.add(title);
 		
 		// Button: Edit booth
 		editBooth = new JButton("Edit your booth");
@@ -75,10 +81,9 @@ public class BoothBusinessPage extends JFrame implements ActionListener{
 		c.gridy = 2;
 		g.add(returnHome, c);
 		
-		add(title);
-		add(g);
+		frame.add(p, BorderLayout.NORTH);
+		frame.add(g, BorderLayout.CENTER);
 		
-		setVisible(true);
 	}
 	
 	@Override
@@ -93,16 +98,15 @@ public class BoothBusinessPage extends JFrame implements ActionListener{
 			 if (input == 0) {
 				 // yes
 				 
-				 File tbm = new File("src/booth-data.txt");
+				 File tbm = new File("booth-data.txt");
 				 String oldContent = "";
 				 String oldString = "";
-				 Writer fw = null;
+				 FileWriter fw = null;
 				 BufferedReader reader = null;
 				 boolean found = false;
 				 
 					try {
 						reader = new BufferedReader(new FileReader(tbm));
-						fw = new FileWriter((tbm), false);
 			        	
 						String line = reader.readLine();
 
@@ -110,6 +114,7 @@ public class BoothBusinessPage extends JFrame implements ActionListener{
 							if (line.equals(String.valueOf(this.boothID))) {
 					        	for (int i = 0; i < 5; i++) {
 						        	oldString = oldString.concat(line);
+						        	oldString = oldString.concat(System.lineSeparator());
 					        		line = reader.readLine();
 					        	}
 					        	found = true;
@@ -119,17 +124,26 @@ public class BoothBusinessPage extends JFrame implements ActionListener{
 						        line = reader.readLine();
 						        
 						}
-						
+						reader.close();
 						if (found == true) {
+							fw = new FileWriter(tbm, false);
+							readAccounts(SignIn.BOOTH_ACCOUNT_PATH);
+							accounts.remove(boothID);
+							writeAccounts(SignIn.BOOTH_ACCOUNT_PATH);
 							String newContent = oldContent.replaceAll(oldString, "");
+							System.out.println(newContent);
 							fw.write(newContent);
 							JOptionPane.showMessageDialog(null, "Your booth has been deleted.");
+							fw.close();
+							disableComponents();
 							// go to home page
-//							OpeningPage o = new OpeningPage();
+							OpeningPage o = new OpeningPage(this.frame);
 							
 						} else {
 					        JOptionPane.showMessageDialog(null, "Something went wrong. Try again later.");
-//							OpeningPage o = new OpeningPage();
+					        fw.close();
+					        disableComponents();
+							OpeningPage o = new OpeningPage(this.frame);
 						}
 						
 					} catch (IOException e1) {
@@ -143,11 +157,66 @@ public class BoothBusinessPage extends JFrame implements ActionListener{
 			 }
 		} else if (e.getSource() == editBooth) {
 			// Open Edit Booth page
+			disableComponents();
 //			EditBoothPage page = new EditBoothPage(this.boothID);
 		} else if (e.getSource() == returnHome) {
 			// Open the Home panel
-//			OpeningPage o = new OpeningPage();
+			disableComponents();
+			OpeningPage o = new OpeningPage(this.frame);
 		}
 	}
+	
+	private void disableComponents() {
+		title.setVisible(false);
+		g.setVisible(false);
+	}
+	
+	private void readAccounts(String filePath) {
+    	accounts = new HashMap<>();
+    	Scanner scan = null;
+    	try {
+    		scan = new Scanner(new File(filePath));
+    		currentID = scan.nextInt();
+    		scan.nextLine();
+    		while(scan.hasNextLine()) {
+    			String username = scan.nextLine();
+        		String password = scan.nextLine();
+        		int boothID = Integer.parseInt(scan.nextLine());
+        		accounts.put(boothID, new Account(username,password,boothID));
+    		}
+    		scan.close();
+    	} catch (FileNotFoundException e) {
+    		FileWriter fw = null;
+    		try {
+    			fw = new FileWriter(new File(filePath));
+    			fw.write("");
+    			fw.close();
+    		} catch (IOException e1) {
+    			e1.printStackTrace();
+    		}
+    	}
+    }
+    
+    private void writeAccounts(String filePath) {
+    	FileWriter fw = null;
+    	try {
+    		fw = new FileWriter(new File(filePath), false);	
+    		fw.write(String.valueOf(currentID));
+    		fw.write(String.format("%n"));
+    		for (Integer ID : accounts.keySet()) {
+    			String username = accounts.get(ID).username;
+    			String password = accounts.get(ID).password;
+    			fw.write(username);
+    			fw.write(String.format("%n"));
+    			fw.write(password);
+    			fw.write(String.format("%n"));
+    			fw.write(String.valueOf(ID));
+    			fw.write(String.format("%n"));
+    		}
+    		fw.close();
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+    }
 	
 }
