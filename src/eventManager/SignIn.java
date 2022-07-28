@@ -75,7 +75,9 @@ public class SignIn implements ActionListener {
         signButton = new JButton("Signup");
         signButton.setFont(new Font("Arial", Font.PLAIN, 15));
         signButton.addActionListener(this);
-        buttonPanel.add(signButton);
+        if (!OrganizerOrNot) {
+        	buttonPanel.add(signButton);
+        }
         
         buttonPanel.setMaximumSize(new Dimension(200,60));
         buttonPanel.setAlignmentX(0.5f);
@@ -106,6 +108,8 @@ public class SignIn implements ActionListener {
         if (e.getSource() == logButton) {
         	if (!OrganizerOrNot) {
         		readAccounts(BOOTH_ACCOUNT_PATH);
+        	} else {
+        		readAccounts(ORGANIZER_ACCOUNT_PATH);
         	}
             if (accounts.containsKey(data)) {
             	if (!data.equals("") && !data2.equals("")) {
