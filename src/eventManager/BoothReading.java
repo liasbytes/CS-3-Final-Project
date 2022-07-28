@@ -2,7 +2,6 @@ package eventManager;
 
 import java.util.*;
 
-import eventManager.Booth;
 import eventManager.Booth.BoothType;
 
 import java.io.*;
@@ -38,11 +37,10 @@ public class BoothReading {
                 BoothType bType = BoothType.valueOf(scan.nextLine().toUpperCase());
                 int curBoothId = scan.nextInt();
                 scan.nextLine();
-                System.out.println(boothName+boothDesc+popLvl+bType+curBoothId);
                 boothData.add(new Booth(boothName, boothDesc, popLvl, bType, curBoothId));
             }
         } catch (Exception e) {
-        	e.printStackTrace();
+            e.printStackTrace();
         }
         return boothData;
     }
