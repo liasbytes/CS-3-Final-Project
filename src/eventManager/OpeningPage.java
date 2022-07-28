@@ -26,69 +26,60 @@ class OpeningPage
 		title = new JLabel("Event Manager");
 		title.setFont(new Font("Serif", Font.BOLD, 30));
 		title.setAlignmentX(0.5f);
-		//title.setBorder(BorderFactory.createEmptyBorder(10,275,10,0));
+		title.setBorder(BorderFactory.createEmptyBorder(0,0,10,0));
 		panel.add(title);
 
 		label = new JLabel("Hello, and welcome to Event Manager! ");
 		label.setFont(new Font("Serif", Font.PLAIN, 20));
-		label.setBorder(BorderFactory.createEmptyBorder(0,30,0,0));
+		label.setBorder(BorderFactory.createEmptyBorder(0,0,10,0));
 		label.setAlignmentX(0.5f);
 		panel.add(label);
 		
-		label = new JLabel("This program enables the user to view and/or");
+		label = new JLabel("This program enables the user to view and/or manage information");
 		label.setFont(new Font("Serif", Font.PLAIN, 20));
-		label.setBorder(BorderFactory.createEmptyBorder(0,30,0,0));
+		label.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 		label.setAlignmentX(0.5f);
 		panel.add(label);
 		
-		label = new JLabel("manage information regarding event booths. Below are the available user roles: ");
+		label = new JLabel("regarding the event booths. Below are all the available user roles: ");
 		label.setFont(new Font("Serif", Font.PLAIN, 20));
 		label.setAlignmentX(0.5f);
-		//label.setBorder(BorderFactory.createEmptyBorder(0,30,0,0));
+		label.setBorder(BorderFactory.createEmptyBorder(0,0,10,0));
 		panel.add(label);
 		
 		label = new JLabel("Event organizer: manages all booth placement.");
 		label.setFont(new Font("Serif", Font.PLAIN, 20));
 		label.setAlignmentX(0.5f);
-		//label.setBorder(BorderFactory.createEmptyBorder(15,30,0,0));
 		panel.add(label);
 		
 		label = new JLabel("Booth holders: set up their booths with booth information.");
 		label.setFont(new Font("Serif", Font.PLAIN, 20));
 		label.setAlignmentX(0.5f);
-		//label.setBorder(BorderFactory.createEmptyBorder(5,30,0,0));
 		panel.add(label);
 		
 		label = new JLabel("Visitors: view an overview of event and layout of all event booths.");
 		label.setFont(new Font("Serif", Font.PLAIN, 20));
 		label.setAlignmentX(0.5f);
-		//label.setBorder(BorderFactory.createEmptyBorder(5,30,5,0));
+		label.setBorder(BorderFactory.createEmptyBorder(0,0,10,0));
 		panel.add(label);
 		
 		label = new JLabel("How would you like to proceed?");
 		label.setFont(new Font("Serif", Font.PLAIN, 20));
 		label.setAlignmentX(0.5f);
-		//label.setBorder(BorderFactory.createEmptyBorder(10,30,0,0));
 		panel.add(label);
 		
 		userEvent = new JButton("Event Organizer");
 		userEvent.setFont(new Font("Serif", Font.BOLD, 17));
 		userEvent.addActionListener(this);
 		
-		//panel.add(userEvent);
-		
 		userBooth = new JButton("Booth Holder");
 		userBooth.setFont(new Font("Serif", Font.BOLD, 17));
 		userBooth.addActionListener(this);
-		//panel.add(userBooth);
 				
 		userVisitor = new JButton("Event Visitor");
 		userVisitor.setFont(new Font("Serif", Font.BOLD, 17));
 		userVisitor.addActionListener(this);
-		//panel.add(userVisitor);
-		
-		//panel.add(Box.createRigidArea(new Dimension(frame.getX(),frame.getY()/4)));
-		
+				
 		buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout());
 		buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 50, 50));

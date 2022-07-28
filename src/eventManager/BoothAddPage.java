@@ -41,7 +41,7 @@ public class BoothAddPage implements ActionListener{
 	private JSlider npopularity;
 	private JLabel boothType;
 	private JComboBox tboothType;
-	private JButton submit;
+	private JButton submit, back;
 	
 	private JPanel p;
 	private JLabel thankYou;
@@ -77,6 +77,11 @@ public class BoothAddPage implements ActionListener{
 		submit.setSize(100, 30);
 		submit.addActionListener(this);
 		
+		
+		 back = new JButton("Back to Main Menu");
+		 back.setSize(100, 30);
+		 back.addActionListener(this);
+	        
 		name = new JLabel("Booth name: ");
 		desc = new JLabel("Booth description:");
 		popularity = new JLabel("Estimated visitor traffic (1-5):");
@@ -150,9 +155,11 @@ public class BoothAddPage implements ActionListener{
 		title.setAlignmentX(0.5f);
 		c.setAlignmentX(0.5f);
 		submit.setAlignmentX(0.5f);
+		back.setAlignmentX(0.5f);
 		mainPanel.add(title);
 		mainPanel.add(c);
 		mainPanel.add(submit);
+		mainPanel.add(back);
 		
 		this.frame.add(mainPanel);
 		
@@ -163,8 +170,8 @@ public class BoothAddPage implements ActionListener{
 		p = new JPanel(new GridBagLayout());
 		
 		thankYou = new JLabel("Thank you for registering your booth!");
-		boothPage = new JButton("Go to booth page");
-		homePage = new JButton("Go to home page");
+		boothPage = new JButton("View booth map");
+		homePage = new JButton("Return to home page");
 		
 		boothPage.addActionListener(this);
 		homePage.addActionListener(this);
@@ -206,7 +213,10 @@ public class BoothAddPage implements ActionListener{
 			mainPanel.setVisible(false);
 			this.frame.add(p);
 			p.setVisible(true);
-		}
+		} else if (e.getSource() == back) {
+			mainPanel.setVisible(false);
+			OpeningPage f = new OpeningPage(this.frame);
+        }
 		
 		if (e.getSource() == boothPage) {
 			// Go to booth page
