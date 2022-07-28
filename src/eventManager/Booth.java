@@ -74,7 +74,7 @@ public class Booth {
 	 * BoothType accessor
 	 * @return Type of booth
 	 */
-	public BoothType boothType() {
+	public BoothType getBoothType() {
 		return this.boothType;
 	}
 	
@@ -82,7 +82,7 @@ public class Booth {
 	 * BoothID accessor
 	 * @return ID of booth
 	 */
-	public int boothID() {
+	public int getBoothID() {
 		return this.boothID;
 	}
 	

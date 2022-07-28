@@ -1,16 +1,15 @@
-
-1
-
-
+Menchie's
+We sell frozen yogurt
 3
 FOOD
 1
-
-
-3
+Dahlia's Daisies
+Flower arrangements for anyone
+4
+PRODUCTS
+1
+Amber's Apples
+We sell apples
+5
 FOOD
 1
-
-
-3
-FOOD

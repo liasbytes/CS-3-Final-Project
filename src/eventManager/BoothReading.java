@@ -15,7 +15,7 @@ public class BoothReading {
      * @param args console input
      */
     public static void main(String[] args) {
-        readFile("booth-data.txt");
+        readFile("src/booth-data.txt");
     }
 
     /**
@@ -34,7 +34,7 @@ public class BoothReading {
         }
         ArrayList<Booth> boothData = new ArrayList<>();
         while (scan.hasNext()) {
-            boothData.add(new Booth(scan.next(), scan.next(), scan.nextInt(), BoothType.valueOf(scan.next()),
+            boothData.add(new Booth(scan.nextLine(), scan.nextLine(), scan.nextInt(), BoothType.valueOf(scan.nextLine()),
                     scan.nextInt()));
         }
         return boothData;

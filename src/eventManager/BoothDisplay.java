@@ -35,7 +35,7 @@ public class BoothDisplay extends JPanel{
 		
 		if (b == null) {
 			
-		} else if (b.boothType() == Booth.BoothType.UNAVAILABLE) {
+		} else if (b.getBoothType() == Booth.BoothType.UNAVAILABLE) {
 			name = new JLabel("Unavailable Spot");
 			name.setFont(bold);
 			name.setAlignmentX(0);
@@ -57,7 +57,7 @@ public class BoothDisplay extends JPanel{
 			description.setEditable(false);
 			this.add(description);
 			
-			String type = b.boothType().toString().toLowerCase();
+			String type = b.getBoothType().toString().toLowerCase();
 			char[] chars = type.toCharArray();
 			chars[0] = Character.toUpperCase(chars[0]);
 			type = new String(chars);
@@ -67,13 +67,13 @@ public class BoothDisplay extends JPanel{
 			boothType.setPreferredSize(new Dimension(d.width,25));
 			this.add(boothType);
 			
-			if (b.boothType() == Booth.BoothType.FOOD) {
+			if (b.getBoothType() == Booth.BoothType.FOOD) {
 				borderColor = new Color(244,191,191);
-			} else if (b.boothType() == Booth.BoothType.DRINK) {
+			} else if (b.getBoothType() == Booth.BoothType.DRINK) {
 				borderColor = new Color(255,217,192);
-			} else if (b.boothType() == Booth.BoothType.ACTIVITY) {
+			} else if (b.getBoothType() == Booth.BoothType.ACTIVITY) {
 				borderColor = new Color(255,248,100);
-			} else if (b.boothType() == Booth.BoothType.PRODUCTS) {
+			} else if (b.getBoothType() == Booth.BoothType.PRODUCTS) {
 				borderColor = new Color(140,192,222);
 			}
 		}

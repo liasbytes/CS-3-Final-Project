@@ -28,17 +28,16 @@ public class BoothBusinessPage extends JFrame implements ActionListener{
 	private JButton editBooth;
 	private JButton deleteBooth;
 	private JButton returnHome;
-	
-	public static void main(String[] args) {
-		BoothBusinessPage b = new BoothBusinessPage(7); // Number here is the booth ID
-	}
+	private JFrame frame;
 	
 	/**
 	 * Creates the main Booth page for businesses, allowing them to edit or delete their booth.
 	 * @param boothID ID of the booth/account
 	 */
-	public BoothBusinessPage(int boothID) {
+	public BoothBusinessPage(int boothID, JFrame frame) {
 		this.boothID = boothID;
+		this.frame = frame;
+		
 		UIManager.put("Label.font", new Font("Arial", Font.PLAIN, 14));
 		setBounds(250, 150, 750, 500);
 		setTitle("Manage your booth");
@@ -126,11 +125,11 @@ public class BoothBusinessPage extends JFrame implements ActionListener{
 							fw.write(newContent);
 							JOptionPane.showMessageDialog(null, "Your booth has been deleted.");
 							// go to home page
-							OpeningPage o = new OpeningPage();
+//							OpeningPage o = new OpeningPage();
 							
 						} else {
 					        JOptionPane.showMessageDialog(null, "Something went wrong. Try again later.");
-							OpeningPage o = new OpeningPage();
+//							OpeningPage o = new OpeningPage();
 						}
 						
 					} catch (IOException e1) {
@@ -144,10 +143,10 @@ public class BoothBusinessPage extends JFrame implements ActionListener{
 			 }
 		} else if (e.getSource() == editBooth) {
 			// Open Edit Booth page
-			EditBoothPage page = new EditBoothPage();
+//			EditBoothPage page = new EditBoothPage(this.boothID);
 		} else if (e.getSource() == returnHome) {
 			// Open the Home panel
-			OpeningPage o = new OpeningPage();
+//			OpeningPage o = new OpeningPage();
 		}
 	}
 	
