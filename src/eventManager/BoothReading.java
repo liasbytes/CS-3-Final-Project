@@ -15,7 +15,7 @@ public class BoothReading {
      * @param args console input
      */
     public static void main(String[] args) {
-        readFile("src/booth-data.txt");
+        System.out.println(readFile("src/booth-data.txt"));
     }
 
     /**
@@ -27,15 +27,20 @@ public class BoothReading {
      */
     public static ArrayList<Booth> readFile(String fileName) {
         Scanner scan = null;
+        ArrayList<Booth> boothData = new ArrayList<>();
         try {
             scan = new Scanner(new File(fileName));
+            while (scan.hasNext()) {
+                String boothName = scan.nextLine();
+                String boothDesc = scan.nextLine();
+                int popLvl = scan.nextInt();
+                BoothType bType = BoothType.valueOf(scan.nextLine().toUpperCase());
+                int curBoothId = scan.nextInt();
+                boothData.add(
+                        new Booth(boothName, boothDesc, popLvl, bType, curBoothId));
+            }
         } catch (Exception e) {
-            e.printStackTrace();
-        }
-        ArrayList<Booth> boothData = new ArrayList<>();
-        while (scan.hasNext()) {
-            boothData.add(new Booth(scan.nextLine(), scan.nextLine(), scan.nextInt(), BoothType.valueOf(scan.nextLine()),
-                    scan.nextInt()));
+
         }
         return boothData;
     }
