@@ -183,8 +183,8 @@ public class SignIn implements ActionListener {
     			fw.write(username);
     			fw.write(String.format("%n"));
     			fw.write(password);
-    			fw.write(String.valueOf(accountID));
     			fw.write(String.format("%n"));
+    			fw.write(String.valueOf(accountID));
     			fw.write(String.format("%n"));
     		}
     		fw.close();
