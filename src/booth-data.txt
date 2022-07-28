@@ -1,35 +1,70 @@
-13
+Ugly Baby Shop
+Rosalie and Douglas Gale started the store in 2008 with a special focus on DIY craft kits and enamel pins by independent artists. The store carries products for kids, DIY craft kits, enamel pins, home goods, accessories, and stationery.
+2
+PRODUCTS
+11
 Outsider Comics
-Comics for folks of all ages!!!
+Comics for folks of all ages
 3
 PRODUCTS
-14
+12
 Agora
-Level up your cooking with Mediterranean specialty foods and wines from Agora. You’ll be shocked at just how much Agora fits into their tiny shop, especially their wine bar, where you can enjoy a glass of vino or even a full meal.
+Level up your cooking with Mediterranean specialty foods and wines from Agora. You’ll be shocked at just how much Agora fits into their tiny shop, especially their wine bar, where you can enjoy a glass of vino or even a full meal
 2
 FOOD
-17
-Ugly Baby Shop
-Rosalie and Douglas Gale started the store in 2008 with a special focus on DIY craft kits and enamel pins by independent artists. The store carries products for kids, DIY craft kits, enamel pins, home goods, accessories, clothing, and stationery.
-2
-PRODUCTS
-18
+13
 Phoenix Tea Shop
 Originally opened as an online-only tea shop, owner Virginia Wright wanted to bring her knowledge of teas, tea wares, and other tea-related products to tea aficionados. 
 5
 DRINK
-19
+14
 Ray's Food
 Plenty of delicious treats for any time of the day. 
-3
+1
 FOOD
-20
+15
 Mustache Milk Tea
-We, Mustache Milk Tea, are known as a local home made milk tea. Our team are proud of delivering the best drinks ever to our customers by selecting highest quality tea leaves and ingredients. 
+We, Mustache Milk Tea, are known as a local home made milk tea. Our team are proud of delivering the best drinks ever to our customers by selecting highest quality tea leaves and ingredients.
 5
 DRINK
-21
+16
 Left Bank Books
 Left Bank Books carries over 10,000 new and used books, and has close to 70 sections. We specialize in anti-authoritarian, anarchist, independent, radical and small-press titles.
 1
 PRODUCTS
+17
+Amber's Apples
+We sell all kinds of apples!
+4
+FOOD
+18
+Dahlia's Daisies
+Flower arrangements for everyone.
+3
+PRODUCTS
+19
+Thea Candle Co
+Created by four undergraduate students at the University of Washington, Thea Candle Co. is an aromatherapy candle company that supports the advancement of mental health research. Each eco-friendly candle uses locally and ethically sourced coconut soy wax, 100% natural essential oils, and wooden wicks, while 15% of all profits are donated towards mental health organizations.
+3
+PRODUCTS
+20
+Likelihood
+Likelihood has a focus on streetwear and trends and carries everything from candles to bucket hats and side bags. Whether you’re in the know or want to know what the cool kids are wearing, Likelihood is the spot for you.
+5
+PRODUCTS
+21
+Menchie's
+Frozen yogurt and treats, for the whole family!
+2
+FOOD
+22
+Stitches
+Independent and locally owned since 2004, Stitches provides fashion fabric, notions, and yarn to designers, home sewers, and creative people throughout the Puget Sound area. 
+2
+PRODUCTS
+23
+Hallie's Hair Salon
+Free hair consultations for first 50 customers, plus get coupons for our salon 
+4
+ACTIVITY
+24
