@@ -214,7 +214,7 @@ public class EditBoothPage implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == update) {
-			File tbm = new File("src/booth-data.txt");
+			File tbm = new File("booth-data.txt");
 			 String oldContent = "";
 			 String oldString = "";
 			 String newString = tname.getText() + String.format("%n") + tdesc.getText() + String.format("%n") + npopularity.getValue() + String.format("%n") + tboothType.getSelectedItem() + String.format("%n") + this.boothID;

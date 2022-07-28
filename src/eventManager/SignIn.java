@@ -173,7 +173,7 @@ public class SignIn implements ActionListener {
     	FileWriter fw = null;
     	try {
     		fw = new FileWriter(new File(filePath), false);	
-    		fw.write(currentID);
+    		fw.write(String.valueOf(currentID));
     		fw.write(String.format("%n"));
     		for (String username : accounts.keySet()) {
     			String password = accounts.get(username).password;
@@ -182,7 +182,7 @@ public class SignIn implements ActionListener {
     			fw.write(String.format("%n"));
     			fw.write(password);
     			fw.write(String.format("%n"));
-    			fw.write(accountID);
+    			fw.write(String.valueOf(accountID));
     			fw.write(String.format("%n"));
     		}
     		fw.close();

@@ -191,7 +191,7 @@ public class BoothAddPage implements ActionListener{
 			Writer fw = null;
 			// Add info to file
 			try {
-				fw = new FileWriter(new File("src/booth-data.txt"), true);
+				fw = new FileWriter(new File("booth-data.txt"), true);
 	        	// Written in format:  Name Desc Popularity Type ID
 				fw.write(String.format("%n"));
 				fw.write(tname.getText());
