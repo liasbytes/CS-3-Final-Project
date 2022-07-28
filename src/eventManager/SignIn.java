@@ -23,52 +23,65 @@ public class SignIn implements ActionListener {
     	this.OrganizerOrNot = OrganizerOrNot;
         panel = new JPanel();
 
-        panel.setLayout(null);
+        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+        //panel.add(Box.createRigidArea(new Dimension(frame.getX(),frame.getY())));
+        panel.add(Box.createGlue());
 
         title = new JLabel("Login");
         title.setFont(new Font("Arial", Font.BOLD, 20));
-        title.setBounds(320, 120, 70, 30);
+        title.setPreferredSize(new Dimension(70,30));
+        title.setAlignmentX(0.5f);
         panel.add(title);
 
         label = new JLabel("User");
         label.setFont(new Font("Arial", Font.PLAIN, 15));
-        label.setBounds(250, 158, 70, 20);
+        label.setPreferredSize(new Dimension(70,20));
+        label.setAlignmentX(0.5f);
         panel.add(label);
 
         username = new JTextField();
         username.setFont(new Font("Arial", Font.PLAIN, 15));
-        username.setBounds(250, 175, 193, 28);
+        username.setMaximumSize(new Dimension(200,30));
+        username.setAlignmentX(0.5f);
         panel.add(username);
 
         password1 = new JLabel("Password");
         password1.setFont(new Font("Arial", Font.PLAIN, 15));
-        password1.setBounds(250, 205, 70, 20);
+        password1.setPreferredSize(new Dimension(70,20));
+        password1.setAlignmentX(0.5f);
         panel.add(password1);
 
         password = new JPasswordField();
         password.setFont(new Font("Arial", Font.PLAIN, 15));
-        password.setBounds(250, 225, 193, 28);
+        password.setMaximumSize(new Dimension(200,30));
+        password.setAlignmentX(0.5f);
         panel.add(password);
 
+        JPanel buttonPanel = new JPanel(new FlowLayout());
         logButton = new JButton("Login");
         logButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        logButton.setBounds(250, 260, 90, 25);
         logButton.addActionListener(this);
-        panel.add(logButton);
+        buttonPanel.add(logButton);
 
         signButton = new JButton("Signup");
         signButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        signButton.setBounds(350, 260, 90, 25);
         signButton.addActionListener(this);
-        panel.add(signButton);
+        buttonPanel.add(signButton);
+        
+        buttonPanel.setMaximumSize(new Dimension(200,60));
+        buttonPanel.setAlignmentX(0.5f);
+        
+        panel.add(buttonPanel);
 
         backButton = new JButton("Back to Main Menu");
         backButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        backButton.setBounds(250, 300, 190, 25);
         backButton.addActionListener(this);
+        backButton.setAlignmentX(0.5f);
         panel.add(backButton);
+        
+        panel.add(Box.createGlue());
 
-        this.frame.add(panel);
+        this.frame.add(panel, BorderLayout.CENTER);
     }
 
     /**

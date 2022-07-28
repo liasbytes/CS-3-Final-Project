@@ -12,7 +12,7 @@ public class OpeningDriver{
 	{
 		JFrame mainFrame = new JFrame();
 		mainFrame.setTitle("Event Organizer");
-		mainFrame.setResizable(false);
+		mainFrame.setResizable(true);
 		mainFrame.setBounds(250,250,1000,750);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setVisible(true);
