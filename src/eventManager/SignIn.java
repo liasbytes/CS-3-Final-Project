@@ -180,11 +180,11 @@ public class SignIn implements ActionListener {
     		for (String username : accounts.keySet()) {
     			String password = accounts.get(username).password;
     			int accountID = accounts.get(username).ID;
-    			fw.write(String.valueOf(accountID));
-    			fw.write(String.format("%n"));
     			fw.write(username);
     			fw.write(String.format("%n"));
     			fw.write(password);
+    			fw.write(String.valueOf(accountID));
+    			fw.write(String.format("%n"));
     			fw.write(String.format("%n"));
     		}
     		fw.close();

@@ -75,7 +75,7 @@ public class BoothPlacer {
 		place4s();
 		LinkedList<Booth> allRemaining = new LinkedList<>();
 		// If cost3 makes up a significant (more than 35%) portion of the booths, runs the Hungarian algorithm on it separately.
-		if (cost3.size() >= booths.size()*0.35) {
+		if (cost3.size() >= booths.size()*0.40) {
 			updateCostsRunHungarian(cost3);
 			allRemaining.addAll(cost2);
 			allRemaining.addAll(cost1);
