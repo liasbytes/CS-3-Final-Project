@@ -158,7 +158,7 @@ public class BoothBusinessPage implements ActionListener{
 		} else if (e.getSource() == editBooth) {
 			// Open Edit Booth page
 			disableComponents();
-//			EditBoothPage page = new EditBoothPage(this.boothID);
+			EditBoothPage page = new EditBoothPage(this.boothID, this.frame);
 		} else if (e.getSource() == returnHome) {
 			// Open the Home panel
 			disableComponents();

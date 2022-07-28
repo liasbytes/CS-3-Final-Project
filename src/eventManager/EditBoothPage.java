@@ -69,7 +69,7 @@ public class EditBoothPage implements ActionListener{
 		mainFrame.setBounds(250,250,1000,750);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setVisible(true);
-		EditBoothPage o = new EditBoothPage(1, mainFrame);
+		EditBoothPage o = new EditBoothPage(13, mainFrame);
 	}
 	
 	/**
@@ -94,15 +94,15 @@ public class EditBoothPage implements ActionListener{
 		update.setSize(100, 30);
 		update.addActionListener(this);
 		
-//		allBooths = BoothReading.readFile("src/booth-data.txt");
-//		for (Booth b : allBooths) {
-//			if (b.getBoothID() == this.boothID) {
-//				boothName = b.getName(); 
-//				boothDesc = b.getDescription();
-//				boothPop = b.getPopularity();
-//				boothTypeEnum = b.getBoothType();
-//			}
-//		}
+		allBooths = BoothReading.readFile("booth-data.txt");
+		for (Booth b : allBooths) {
+			if (b.getBoothID() == this.boothID) {
+				boothName = b.getName(); 
+				boothDesc = b.getDescription();
+				boothPop = b.getPopularity();
+				boothTypeEnum = b.getBoothType();
+			}
+		}
 		
 		backBooth = new JButton("Back to Manage Booth");
 		backBooth.setSize(100, 30);
@@ -217,36 +217,40 @@ public class EditBoothPage implements ActionListener{
 			File tbm = new File("booth-data.txt");
 			 String oldContent = "";
 			 String oldString = "";
-			 String newString = tname.getText() + String.format("%n") + tdesc.getText() + String.format("%n") + npopularity.getValue() + String.format("%n") + tboothType.getSelectedItem() + String.format("%n") + this.boothID;
+			 String newString = this.boothID + String.format("%n")+ tname.getText() + String.format("%n") + tdesc.getText() + String.format("%n") + npopularity.getValue() + String.format("%n") + tboothType.getSelectedItem() + String.format("%n");
+			 System.out.println(newString);
 			 
-			 
-			 Writer fw = null;
+			 FileWriter fw = null;
 			 BufferedReader reader = null;
 			 boolean found = false;
 			 
 				try {
-					reader = new BufferedReader(new FileReader(tbm));
-					fw = new FileWriter((tbm), false);
-		        	
+					reader = new BufferedReader(new FileReader(tbm));		        	
 					String line = reader.readLine();
 
 					while (line != null){
 						if (line.equals(String.valueOf(this.boothID))) {
 				        	for (int i = 0; i < 5; i++) {
-					        	oldString = oldString.concat(line);
+					        	oldString = oldString.concat(line) + System.lineSeparator();;
+					        	oldContent = oldContent.concat(line) + System.lineSeparator();
 				        		line = reader.readLine();
 				        	}
 				        	found = true;
-				        	System.out.println(oldString);
 				        }
 					        oldContent = oldContent + line + System.lineSeparator();
 					        line = reader.readLine();
 					        
 					}
 					
+					reader.close();
+					
 					if (found == true) {
+						fw = new FileWriter((tbm), false);
+						System.out.println(oldContent);
 						String newContent = oldContent.replaceAll(oldString, newString);
-						fw.write(newContent);						
+						System.out.println(newContent);
+						fw.write(newContent);				
+						fw.close();
 					} else {
 				        JOptionPane.showMessageDialog(null, "Something went wrong. Try again later.");
 				        reader.close();
