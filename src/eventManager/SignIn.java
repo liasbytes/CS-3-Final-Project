@@ -3,8 +3,13 @@ package eventManager;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class SignIn implements ActionListener {
     private JLabel title, password1, label;
@@ -14,6 +19,11 @@ public class SignIn implements ActionListener {
     private JFrame frame;
     private JPanel panel;
     private boolean OrganizerOrNot;
+    private Map<String, Account> accounts;
+    
+    private final static String BOOTH_ACCOUNT_PATH = "booth-accounts.txt";
+    private final static String ORGANIZER_ACCOUNT_PATH = "organizer-accounts.txt";
+    private static int currentID;
 
     /**
      * Constructor method for instance variables
@@ -24,7 +34,6 @@ public class SignIn implements ActionListener {
         panel = new JPanel();
 
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
-        //panel.add(Box.createRigidArea(new Dimension(frame.getX(),frame.getY())));
         panel.add(Box.createGlue());
 
         title = new JLabel("Login");
@@ -93,21 +102,31 @@ public class SignIn implements ActionListener {
         String data = username.getText();
         String data2 = String.valueOf(password.getPassword());
 
-        Map<String, String> map = new HashMap<>();
+        accounts = new HashMap<>();
         if (e.getSource() == logButton) {
-            if (map.containsKey(data2)) {
+        	if (!OrganizerOrNot) {
+        		readAccounts(BOOTH_ACCOUNT_PATH);
+        	}
+            if (accounts.containsKey(data)) {
             	if (!data.equals("") && !data2.equals("")) {
                 	if (OrganizerOrNot == false)
-                        getBooth();
+                        getBooth(accounts.get(data).ID);
                 	else
                 		getOrganizer();
                 }
             }
         } else if (e.getSource() == signButton) {
-            map.put(data2, data);
+        	if (!OrganizerOrNot) {
+        		readAccounts(BOOTH_ACCOUNT_PATH);
+        	}
+        	currentID++;
+            accounts.put(data, new Account(data,data2,currentID));
+            if (!OrganizerOrNot) {
+            	writeAccounts(BOOTH_ACCOUNT_PATH);
+            }
             if (!data.equals("") && !data2.equals("")) {
             	if (OrganizerOrNot == false)
-                    getBooth();
+                    getBooth(accounts.get(data).ID);
             	else
             		getOrganizer();
             }
@@ -120,12 +139,60 @@ public class SignIn implements ActionListener {
         }
     }
 
+    private void readAccounts(String filePath) {
+    	accounts = new HashMap<>();
+    	Scanner scan = null;
+    	try {
+    		scan = new Scanner(new File(filePath));
+    		currentID = scan.nextInt();
+    		scan.nextLine();
+    		while(scan.hasNextLine()) {
+    			String username = scan.nextLine();
+        		String password = scan.nextLine();
+        		int boothID = Integer.parseInt(scan.nextLine());
+        		accounts.put(username, new Account(username,password,boothID));
+    		}
+    		scan.close();
+    	} catch (FileNotFoundException e) {
+    		FileWriter fw = null;
+    		try {
+    			fw = new FileWriter(new File(filePath));
+    			fw.write("");
+    			fw.close();
+    		} catch (IOException e1) {
+    			e1.printStackTrace();
+    		}
+    	}
+    }
+    
+    private void writeAccounts(String filePath) {
+    	FileWriter fw = null;
+    	try {
+    		fw = new FileWriter(new File(filePath), false);	
+    		fw.write(currentID);
+    		fw.write(String.format("%n"));
+    		for (String username : accounts.keySet()) {
+    			String password = accounts.get(username).password;
+    			int accountID = accounts.get(username).ID;
+    			fw.write(username);
+    			fw.write(String.format("%n"));
+    			fw.write(password);
+    			fw.write(String.format("%n"));
+    			fw.write(accountID);
+    			fw.write(String.format("%n"));
+    		}
+    		fw.close();
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+    }
+    
     /**
      * Getting booth holder panel
      */
-    public void getBooth() {
+    public void getBooth(int boothID) {
     	panel.setVisible(false);
-        BoothAddPage b = new BoothAddPage(1, this.frame);
+        BoothAddPage b = new BoothAddPage(boothID, this.frame);
     }
     
     /**
@@ -134,5 +201,17 @@ public class SignIn implements ActionListener {
     public void getOrganizer() {
     	panel.setVisible(false);
     	Organizer b = new Organizer(this.frame);
+    }
+    
+    private class Account {
+    	String username;
+    	String password;
+    	int ID;
+    	
+    	private Account(String username, String password, int ID) {
+    		this.username = username;
+    		this.password = password;
+    		this.ID = ID;
+    	}
     }
 }
