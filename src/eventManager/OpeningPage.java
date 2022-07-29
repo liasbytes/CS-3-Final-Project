@@ -7,7 +7,7 @@ import java.awt.event.*;
 class OpeningPage
 	implements ActionListener {
 
-	// Components
+	// GUI Components
 	private JPanel panel, buttonPane;
 	private JLabel title, label;
 	private JButton userEvent, userBooth, userVisitor, map;	
@@ -18,11 +18,13 @@ class OpeningPage
 	 */
 	public OpeningPage(JFrame frame)
 	{
+		//frame and panel
 		this.frame = frame;
 		panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		panel.setBorder(BorderFactory.createEmptyBorder(30,30,30,30));
 		
+		//labels
 		title = new JLabel("Event Manager");
 		title.setFont(new Font("Serif", Font.BOLD, 30));
 		title.setAlignmentX(0.5f);
@@ -68,6 +70,7 @@ class OpeningPage
 		label.setAlignmentX(0.5f);
 		panel.add(label);
 		
+		//buttons
 		userEvent = new JButton("Event Organizer");
 		userEvent.setFont(new Font("Serif", Font.BOLD, 17));
 		userEvent.addActionListener(this);
@@ -79,7 +82,8 @@ class OpeningPage
 		userVisitor = new JButton("Event Visitor");
 		userVisitor.setFont(new Font("Serif", Font.BOLD, 17));
 		userVisitor.addActionListener(this);
-				
+		
+		//panel to organize buttons in a horizontal line
 		buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout());
 		buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 50, 50));
@@ -104,15 +108,21 @@ class OpeningPage
 	 */
 	public void actionPerformed(ActionEvent e)
 	{
+		//hide panels
 		panel.setVisible(false);
 		buttonPane.setVisible(false);
 
+		//event organizer page
 		if (e.getSource() == userEvent) {
 			SignIn s = new SignIn(true, this.frame);
-			}
+		}
+		
+		//booth holder page
 		else if (e.getSource() == userBooth) {
 			SignIn s = new SignIn(false, this.frame);
-			}
+		}
+		
+		//visitor page
 		else if (e.getSource() == userVisitor) {
 	        BoothView b = new BoothView(this.frame);
 		}

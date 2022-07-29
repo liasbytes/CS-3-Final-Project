@@ -16,17 +16,21 @@ import java.util.Scanner;
 class Organizer
 implements ActionListener {
 
-	// Components
+	// GUI Components
 	private static JPanel panel, deletePanel;
 	private static JLabel title, label;
 	private JButton deleteBooth, boothPositions, myDelete, mainMenu;
 	private JFrame frame;
 	private JComboBox<String> jComboBox;
+	
+	// Temporary variables used in delete methods
 	private HashMap<Integer, Account> accounts;
+	private String boothName;
+	
+	// Temporary variables used in display method
 	private HashMap<String, Booth> tempMap;
 	private int currentID;
 	private ArrayList<Booth> booths;
-	private String boothName;
 
 	/**
 	 * constructor to initialize components
@@ -37,14 +41,17 @@ implements ActionListener {
 		booths = BoothReading.readFile("booth-data.txt");
 		tempMap = new HashMap<String, Booth>();
 
+		//panel for deleting booths
 		deletePanel = new JPanel(new GridBagLayout());
 		deletePanel.setLayout(new javax.swing.BoxLayout(deletePanel, javax.swing.BoxLayout.Y_AXIS));
 		deletePanel.setPreferredSize(new Dimension(frame.getX()/2, frame.getY()*3/5));
 
+		//main panel
 		panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		frame.setTitle("Event Manager");
 
+		//labels
 		title = new JLabel("Event Organizer");
 		title.setFont(new Font("Serif", Font.BOLD, 30));
 		title.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
@@ -69,6 +76,7 @@ implements ActionListener {
 		label.setAlignmentX(0.5f);
 		panel.add(label);
 
+		//buttons
 		deleteBooth = new JButton("Delete a booth");
 		deleteBooth.setFont(new Font("Serif", Font.BOLD, 17));
 		deleteBooth.addActionListener(this);
@@ -91,28 +99,36 @@ implements ActionListener {
 		frame.setVisible(true);
 	}
 
-	public void displayBooths() {
-
+	/**
+	 * displays drop-down list of all booths to be selected
+	 */
+	public void displayBooths()
+	{
+		//add all existing booths to temporary HashMap with names and booth objects
 		for (int i = 0; i < booths.size(); i++) {
 			String tempName = booths.get(i).getName();
 			tempMap.put(tempName, booths.get(i));
 		}
 
+		//create ArrayList of all booth names
 		ArrayList<String> tempBooths = new ArrayList<String>();
 		for (Booth b : booths)
 			tempBooths.add(b.getName());
 
+		//convert ArrayList to String for jComboBox
 		String[] myBooths = tempBooths.toArray(new String[0]);
+		
 		title = new JLabel("Booth Deletion");
 		title.setFont(new Font("Serif", Font.BOLD, 30));
 		title.setAlignmentX(0.5f);
 		deletePanel.add(title);
 
+		//use jComboBox to create drop-down list of all booths
 		jComboBox = new JComboBox<>(myBooths);
 		jComboBox.setAlignmentX(0.5f);
 		deletePanel.add(jComboBox);
-
-		myDelete = new JButton("Delete");
+		
+		myDelete = new JButton("Delete"); //delete button
 		myDelete.setFont(new Font("Serif", Font.BOLD, 17));
 		myDelete.addActionListener(this);
 		myDelete.setAlignmentX(0.5f);
@@ -125,7 +141,8 @@ implements ActionListener {
 		deletePanel.setVisible(true);
 	}
 
-	public void deleteBooth(Booth booth) {
+	public void deleteBooth(Booth booth) 
+	{
 		int input = JOptionPane.showConfirmDialog(null, 
 				"Are you sure you want to continue?", "Select an Option...",JOptionPane.YES_NO_CANCEL_OPTION);
 		if (input == 0) {
@@ -210,7 +227,8 @@ implements ActionListener {
 		}
 	}
 
-	private void writeAccounts(String filePath) {
+	private void writeAccounts(String filePath) 
+	{
 		FileWriter fw = null;
 		try {
 			fw = new FileWriter(new File(filePath), false);	
@@ -232,7 +250,8 @@ implements ActionListener {
 		}
 	}
 
-	private static void disableComponents() {
+	private static void disableComponents() 
+	{
 		deletePanel.setVisible(false);
 	}
 
@@ -251,10 +270,16 @@ implements ActionListener {
 			frame.add(deletePanel);
 			panel.setVisible(false);
 			displayBooths();
-		} else if (e.getSource() == boothPositions) {
+		} 
+		
+		//manage positions of booths
+		else if (e.getSource() == boothPositions) {
 			panel.setVisible(false);
 			BoothPositionManager bpm = new BoothPositionManager(this.frame);
-		} else if (e.getSource() == mainMenu) {
+		}
+		
+		//return to main menu
+		else if (e.getSource() == mainMenu) {
 			panel.setVisible(false);
 			deletePanel.setVisible(false);
 			OpeningPage op = new OpeningPage(this.frame);

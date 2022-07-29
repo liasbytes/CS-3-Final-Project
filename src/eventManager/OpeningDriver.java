@@ -16,6 +16,8 @@ public class OpeningDriver{
 		mainFrame.setBounds(0,0,1000,750);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setVisible(true);
+		
+		//create opening page GUI
 		OpeningPage f = new OpeningPage(mainFrame);
 	}
 	
