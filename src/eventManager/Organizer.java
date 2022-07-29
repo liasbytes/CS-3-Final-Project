@@ -183,7 +183,7 @@ implements ActionListener {
 					writeAccounts(SignIn.BOOTH_ACCOUNT_PATH);
 					String newContent = oldContent.replaceAll(oldString, "");
 					fw.write(newContent);
-					JOptionPane.showMessageDialog(null, "Your booth has been deleted.");
+					JOptionPane.showMessageDialog(null, "The booth has been deleted.");
 					fw.close();
 					disableComponents();
 					// go to home page
