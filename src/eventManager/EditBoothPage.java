@@ -214,7 +214,6 @@ public class EditBoothPage implements ActionListener{
 			 String oldContent = "";
 			 String oldString = "";
 			 String newString = this.boothID + String.format("%n")+ tname.getText() + String.format("%n") + tdesc.getText() + String.format("%n") + npopularity.getValue() + String.format("%n") + tboothType.getSelectedItem() + String.format("%n");
-			 System.out.println(newString);
 			 
 			 FileWriter fw = null;
 			 BufferedReader reader = null;

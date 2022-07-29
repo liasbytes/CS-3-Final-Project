@@ -200,6 +200,8 @@ public class BoothAddPage implements ActionListener{
 				fw = new FileWriter(new File("booth-data.txt"), true);
 	        	// Written in format:  Name Desc Popularity Type ID
 				fw.write(String.format("%n"));
+				fw.write(String.valueOf(this.boothID));
+				fw.write(String.format("%n"));
 				fw.write(tname.getText());
 				fw.write(String.format("%n"));
 				fw.write(tdesc.getText());
@@ -207,8 +209,6 @@ public class BoothAddPage implements ActionListener{
 				fw.write(String.valueOf(npopularity.getValue()));
 				fw.write(String.format("%n"));
 				fw.write(String.valueOf(tboothType.getSelectedItem()));
-				fw.write(String.format("%n"));
-				fw.write(String.valueOf(this.boothID));
 				fw.close();
 
 			} catch (IOException e1) {

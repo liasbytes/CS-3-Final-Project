@@ -119,11 +119,11 @@ public class BoothBusinessPage implements ActionListener{
 					        		line = reader.readLine();
 					        	}
 					        	found = true;
-					        	System.out.println(oldString);
 					        }
-						        oldContent = oldContent + line + System.lineSeparator();
+							if(line != null) {
+								oldContent = oldContent + line + System.lineSeparator();
 						        line = reader.readLine();
-						        
+							} 
 						}
 						reader.close();
 						if (found == true) {
@@ -132,7 +132,6 @@ public class BoothBusinessPage implements ActionListener{
 							accounts.remove(boothID);
 							writeAccounts(SignIn.BOOTH_ACCOUNT_PATH);
 							String newContent = oldContent.replaceAll(oldString, "");
-							System.out.println(newContent);
 							fw.write(newContent);
 							JOptionPane.showMessageDialog(null, "Your booth has been deleted.");
 							fw.close();
