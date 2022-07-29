@@ -232,9 +232,10 @@ public class EditBoothPage implements ActionListener{
 				        	}
 				        	found = true;
 				        }
-					        oldContent = oldContent + line + System.lineSeparator();
+						if (line != null) {
+							oldContent = oldContent + line + System.lineSeparator();
 					        line = reader.readLine();
-					        
+						}
 					}
 					
 					reader.close();

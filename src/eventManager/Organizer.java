@@ -172,8 +172,10 @@ implements ActionListener {
 						}
 						found = true;
 					}
-					oldContent = oldContent + line + System.lineSeparator();
-					line = reader.readLine();
+					if (line != null) {
+						oldContent = oldContent + line + System.lineSeparator();
+						line = reader.readLine();
+					}
 				}
 				reader.close();
 				if (found == true) {
