@@ -49,10 +49,14 @@ public class BoothDisplay extends JPanel{
 			name.setPreferredSize(new Dimension(d.width,30));
 			this.add(name);
 			
-			description = new JTextArea(b.getDescription());
+			String descriptionText = b.getDescription();
+			if (descriptionText.length() > (d.width*(d.height-55))/155) {
+				descriptionText = descriptionText.substring(0, (d.width*(d.height-55))/155);
+			}
+			description = new JTextArea(descriptionText);
 			description.setFont(italic);
 			description.setAlignmentX(0);
-			description.setMaximumSize(new Dimension(d.width,d.height-55));
+			description.setPreferredSize(new Dimension(d.width,d.height-55));
 			description.setLineWrap(true);
 			description.setEditable(false);
 			this.add(description);

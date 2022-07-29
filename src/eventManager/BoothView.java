@@ -2,6 +2,12 @@ package eventManager;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
 import javax.swing.*;
 
 public class BoothView
@@ -13,13 +19,14 @@ public class BoothView
 		private JButton backButton;	
 		private JFrame frame;
 		
+		private ArrayList<Booth> booths;
+		private Booth[][] spots;
+		
 		
 		/**
 		 * Constructor to initialize GUI components
-		 * 
-		 * @param data The array of booths to display
 		 */
-		public BoothView(Booth[][] data, JFrame frame)
+		public BoothView(JFrame frame)
 		{
 			this.frame = frame;
 			
@@ -30,11 +37,14 @@ public class BoothView
 			title.setAlignmentX(0.5f);
 			mainPanel.add(title);
 			
-			boothPanel = new JPanel(new GridLayout(data.length, data[0].length));
-			for (int i = 0; i < data.length; i++) {
-				for (int j = 0; j < data[i].length; j++) {
-					Dimension size =  new Dimension(this.frame.getWidth()/data.length,(this.frame.getHeight()-100)/data[i].length);
-					boothPanel.add(new BoothDisplay(data[i][j], size));
+			readSpots("spots.txt");
+			boothPanel = new JPanel(new GridLayout(spots.length, spots[0].length));
+			boothPanel.setMaximumSize(new Dimension(this.frame.getWidth(), this.frame.getHeight()-130));
+			for (int i = 0; i < spots.length; i++) {
+				for (int j = 0; j < spots[i].length; j++) {
+					Dimension size =  new Dimension(this.frame.getWidth()/spots[i].length,(this.frame.getHeight()-130)/spots.length);
+					BoothDisplay bd = new BoothDisplay(spots[i][j],size);
+					boothPanel.add(bd);
 				}
 			}
 			mainPanel.add(boothPanel);
@@ -62,5 +72,33 @@ public class BoothView
 	            buttonPanel.setVisible(false);
 	            OpeningPage f = new OpeningPage(this.frame);
 	        }
+		}
+	
+		private void readSpots(String filePath) {
+			booths = BoothReading.readFile("booth-data.txt");
+			HashMap<Integer, Booth> IDMap = new HashMap<>();
+			for (Booth b : booths) {
+				IDMap.put(b.getBoothID(), b);
+			}
+			Scanner scan = null;
+			try {
+				scan = new Scanner(new File(filePath));
+				int rows = scan.nextInt();
+				int cols = scan.nextInt();
+				spots = new Booth[rows][cols];
+				for (int i = 0; i < spots.length; i++) {
+					for (int j = 0; j < spots[0].length; j++) {
+						String s = scan.next();
+						if (s.equals("-1")) {
+							spots[i][j] = new Booth();
+						} else if (!s.equals("null")) {
+							spots[i][j] = IDMap.get(Integer.parseInt(s));
+						}
+					}
+				}
+				scan.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 }

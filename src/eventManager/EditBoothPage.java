@@ -261,7 +261,7 @@ public class EditBoothPage implements ActionListener{
 		if (e.getSource() == boothPage) {
 			// Go to booth page
 			p.setVisible(false);
-			BoothView bf = new BoothView(Test.getTestBooths(),this.frame);
+			BoothView bf = new BoothView(this.frame);
 		} else if (e.getSource() == homePage) {
 			// Go to home page
 			p.setVisible(false);
