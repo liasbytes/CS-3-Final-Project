@@ -209,6 +209,7 @@ public class EditBoothPage implements ActionListener{
 	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == update) {
+        	if (!(tname.getText()).equals("") && !(tdesc.getText()).equals("")) {
 			File tbm = new File("booth-data.txt");
 			 String oldContent = "";
 			 String oldString = "";
@@ -258,6 +259,7 @@ public class EditBoothPage implements ActionListener{
 			mainPanel.setVisible(false);
 			this.frame.add(p);
 			p.setVisible(true);
+        	}
 		} else if (e.getSource() == backBooth) {
 			mainPanel.setVisible(false);
 			BoothBusinessPage f = new BoothBusinessPage(this.boothID, this.frame);
