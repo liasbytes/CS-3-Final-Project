@@ -25,9 +25,11 @@ public class SignIn implements ActionListener {
     public final static String ORGANIZER_ACCOUNT_PATH = "organizer-accounts.txt";
     private static int currentID;
 
-    /**
-     * Constructor method for instance variables
-     */
+   /**
+    * Constructor method for the Sign In page
+    * @param OrganizerOrNot Whether the sign-in is for an event organizer (or a booth holder)
+    * @param frame Main JFrame to be passed through all constructors
+    */
     public SignIn(boolean OrganizerOrNot, JFrame frame) {
     	this.frame = frame;
     	this.OrganizerOrNot = OrganizerOrNot;
@@ -144,7 +146,11 @@ public class SignIn implements ActionListener {
             OpeningPage f = new OpeningPage(this.frame);
         }
     }
-
+    
+    /**
+	 * Reads information about all accounts from file
+	 * @param filePath File to be read
+	 */
     private void readAccounts(String filePath) {
     	accounts = new HashMap<>();
     	Scanner scan = null;
@@ -171,6 +177,10 @@ public class SignIn implements ActionListener {
     	}
     }
     
+    /**
+	 * Writes information about accounts to file
+	 * @param filePath File to be written to
+	 */
     private void writeAccounts(String filePath) {
     	FileWriter fw = null;
     	try {
@@ -195,6 +205,7 @@ public class SignIn implements ActionListener {
     
     /**
      * Getting booth holder panel
+     * @param boothID
      */
     public void getBooth(int boothID) {
     	panel.setVisible(false);

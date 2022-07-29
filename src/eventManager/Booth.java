@@ -18,7 +18,6 @@ public class Booth {
 	
 	/**
 	 * Constructor method for Booth object if unavailable
-	 * @param boothType Type of booth
 	 */
 	public Booth() {
 		this.name = "Unavailable";
@@ -120,6 +119,10 @@ public class Booth {
 		this.boothType = b;
 	}
 	
+	/**
+	 * BoothID modifier
+	 * @param b New booth ID
+	 */
 	public void setBoothID(int b) {
 		this.boothID = b;
 	}

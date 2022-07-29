@@ -15,6 +15,7 @@ class OpeningPage
 	
 	/**
 	 * constructor to initialize components
+     * @param frame Main JFrame to be passed through all constructors
 	 */
 	public OpeningPage(JFrame frame)
 	{

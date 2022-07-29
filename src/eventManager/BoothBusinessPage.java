@@ -41,6 +41,7 @@ public class BoothBusinessPage implements ActionListener{
 	/**
 	 * Creates the main Booth page for businesses, allowing them to edit or delete their booth.
 	 * @param boothID ID of the booth/account
+	 * @param frame Main JFrame to pass through all constructors
 	 */
 	public BoothBusinessPage(int boothID, JFrame frame) {
 		this.boothID = boothID;
@@ -88,7 +89,7 @@ public class BoothBusinessPage implements ActionListener{
 	
 	@Override
 	/**
-	 * Determines what action to take based on buttons pressed
+	 * Determines what action to take based on buttons pressed, including deleting a booth and going to edit booth page or home page.
 	 * @param e Action performed
 	 */
 	public void actionPerformed(ActionEvent e) {
@@ -166,11 +167,18 @@ public class BoothBusinessPage implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Sets all visible panels of this object to hidden
+	 */
 	private void disableComponents() {
 		p.setVisible(false);
 		g.setVisible(false);
 	}
 	
+	/**
+	 * Reads information about all accounts from file
+	 * @param filePath File to be read
+	 */
 	private void readAccounts(String filePath) {
     	accounts = new HashMap<>();
     	Scanner scan = null;
@@ -197,6 +205,10 @@ public class BoothBusinessPage implements ActionListener{
     	}
     }
     
+	/**
+	 * Writes information about accounts to file
+	 * @param filePath File to be written to
+	 */
     private void writeAccounts(String filePath) {
     	FileWriter fw = null;
     	try {

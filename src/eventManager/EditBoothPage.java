@@ -65,6 +65,7 @@ public class EditBoothPage implements ActionListener{
 	/**
 	 * Creates Booth Add Page
 	 * @param boothID ID of the booth, should match account ID
+	 * @param frame Main JFrame to pass through all constructors
 	 */
 	public EditBoothPage(int boothID, JFrame frame) {
 		this.frame = frame;
@@ -202,6 +203,10 @@ public class EditBoothPage implements ActionListener{
 	}
 
 	@Override
+	/**
+	 * Determines action to take based on buttons pressed, including updating booth information, returning to booth page, or returning to home page.
+	 * @param e Action performed
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == update) {
 			File tbm = new File("booth-data.txt");

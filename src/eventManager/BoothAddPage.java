@@ -58,6 +58,7 @@ public class BoothAddPage implements ActionListener{
 	/**
 	 * Creates Booth Add Page
 	 * @param boothID ID of the booth, should match account ID
+	 * @param frame Main JFrame to be passed through all constructors
 	 */
 	public BoothAddPage(int boothID, JFrame frame) {
 		this.frame = frame;
@@ -186,6 +187,10 @@ public class BoothAddPage implements ActionListener{
 	}
 	
 	@Override
+	/**
+	 * Determines what to do based on actions performed, including adding new booth information to file and going to other pages.
+	 * @param e Action performed
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == submit) {
         	if (!(tname.getText()).equals("") && !(tdesc.getText()).equals("")) {

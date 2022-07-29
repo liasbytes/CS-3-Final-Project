@@ -25,6 +25,7 @@ public class BoothView
 		
 		/**
 		 * Constructor to initialize GUI components
+		 * @param frame Main JFrame to be passed through all constructors
 		 */
 		public BoothView(JFrame frame)
 		{
@@ -74,6 +75,10 @@ public class BoothView
 	        }
 		}
 	
+		/**
+		 * #TODO JAVA DOC HERE PLEASE
+		 * @param filePath
+		 */
 		private void readSpots(String filePath) {
 			booths = BoothReading.readFile("booth-data.txt");
 			HashMap<Integer, Booth> IDMap = new HashMap<>();
