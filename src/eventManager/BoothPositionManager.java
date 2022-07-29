@@ -1,7 +1,7 @@
 package eventManager;
 
+import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -9,93 +9,126 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JButton;
 import javax.swing.JTextField;
 
 public class BoothPositionManager implements ActionListener{
 
 	private JFrame frame;
-	private JPanel panel;
-	private JLabel sizeXLabel, sizeYLabel, spotXLabel, spotYLabel;
+	private JPanel panel, sizePanel, spotPanel, miscPanel, titlePanel;
+	private JLabel sizeXLabel, sizeYLabel, spotXLabel, spotYLabel, title;
 	private JTextField sizeX, sizeY, spotX, spotY;
 	private JButton confirmSize, confirmSpot, placeBooths, organizerPage, mainPage;
 	private Booth[][] spots;
 	private ArrayList<Booth> booths;
 	
+	/**
+	 * Constructor that initializes and places all elements in the GUI for organizers to manage booth placement
+	 * @param inputFrame The JFrame to add objects to
+	 */
 	public BoothPositionManager(JFrame inputFrame) {
-		Font f = new Font("Arial", Font.PLAIN, 16);
+		Font f = new Font("Serif", Font.PLAIN, 14);
 		frame = inputFrame;
 		panel = new JPanel();
-		panel.setLayout(new GridLayout(0,5));
+		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+		panel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
+		
+		titlePanel = new JPanel();
+		titlePanel.setPreferredSize(new Dimension((int) (panel.getWidth()*0.9),100));
+		sizePanel = new JPanel();
+		sizePanel.setPreferredSize(new Dimension((int) (panel.getWidth()*0.9), 100));
+		spotPanel = new JPanel();
+		spotPanel.setPreferredSize(new Dimension((int) (panel.getWidth()*0.9), 100));
+		miscPanel = new JPanel();
+		miscPanel.setPreferredSize(new Dimension((int) (panel.getWidth()*0.9), 100));
+		
+		title = new JLabel("Manage Booth Layout");
+		title.setFont(new Font("Serif", Font.BOLD, 45));
+		titlePanel.add(title);
 		
 		sizeXLabel = new JLabel("Width of event venue (in spots):");
 		sizeXLabel.setFont(f);
-		panel.add(sizeXLabel);
+		sizePanel.add(sizeXLabel);
 		
 		sizeX = new JTextField();
 		sizeX.setFont(f);
-		panel.add(sizeX);
+		sizeX.setPreferredSize(new Dimension(100,20));
+		sizePanel.add(sizeX);
 		
 		sizeYLabel = new JLabel("Height of event venue (in spots):");
 		sizeYLabel.setFont(f);
-		panel.add(sizeYLabel);
+		sizePanel.add(sizeYLabel);
 		
 		sizeY = new JTextField();
 		sizeY.setFont(f);
-		panel.add(sizeY);
+		sizeY.setPreferredSize(new Dimension(100,20));
+		sizePanel.add(sizeY);
 		
 		confirmSize = new JButton("Confirm new venue size");
 		confirmSize.setFont(f);
 		confirmSize.addActionListener(this);
-		panel.add(confirmSize);
+		sizePanel.add(confirmSize);
 		
 		spotXLabel = new JLabel("X position of new unavailable booth:");
 		spotXLabel.setFont(f);
-		panel.add(spotXLabel);
+		spotPanel.add(spotXLabel);
 		
 		spotX = new JTextField();
 		spotX.setFont(f);
-		panel.add(spotX);
+		spotX.setPreferredSize(new Dimension(100,20));
+		spotPanel.add(spotX);
 		
 		spotYLabel = new JLabel("Y position of new unavailable booth:");
 		spotYLabel.setFont(f);
-		panel.add(spotYLabel);
+		spotPanel.add(spotYLabel);
 		
 		spotY = new JTextField();
 		spotY.setFont(f);
-		panel.add(spotY);
+		spotY.setPreferredSize(new Dimension(100,20));
+		spotPanel.add(spotY);
 		
 		confirmSpot = new JButton("Add unavailable booth");
 		confirmSpot.setFont(f);
 		confirmSpot.addActionListener(this);
-		panel.add(confirmSpot);
+		spotPanel.add(confirmSpot);
 		
 		placeBooths = new JButton("Run booth placing algorithm");
 		placeBooths.setFont(f);
 		placeBooths.addActionListener(this);
-		panel.add(placeBooths);
+		miscPanel.add(placeBooths);
 		
 		organizerPage = new JButton("Return to organizer page");
 		organizerPage.setFont(f);
 		organizerPage.addActionListener(this);
-		panel.add(organizerPage);
+		miscPanel.add(organizerPage);
 		
 		mainPage = new JButton("Main Page");
 		mainPage.setFont(f);
 		mainPage.addActionListener(this);
-		panel.add(mainPage);
+		miscPanel.add(mainPage);
+		
+		panel.add(titlePanel);
+		panel.add(sizePanel);
+		panel.add(spotPanel);
+		panel.add(miscPanel);
 		
 		frame.add(panel);
 	}
 	
+	/**
+	 * Handles button input and runs the required methods.
+	 * 
+	 * @param e The event passed in by the object calling this method.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == confirmSize) {
@@ -158,6 +191,10 @@ public class BoothPositionManager implements ActionListener{
 		
 	}
 	
+	/**
+	 * Reads the spots array from a file,
+	 * @param filePath The file path to read from.
+	 */
 	private void readSpots(String filePath) {
 		booths = BoothReading.readFile("booth-data.txt");
 		HashMap<Integer, Booth> IDMap = new HashMap<>();
@@ -186,6 +223,10 @@ public class BoothPositionManager implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Writes the spots array to a file.
+	 * @param filePath The file to write to.
+	 */
 	private void writeSpots(String filePath) {
 		FileWriter fw = null;
 		try {

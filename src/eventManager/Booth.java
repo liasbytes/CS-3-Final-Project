@@ -1,4 +1,8 @@
 package eventManager;
+
+/**
+ * Stores information about a booth
+ */
 public class Booth {
 	
 	public enum BoothType {

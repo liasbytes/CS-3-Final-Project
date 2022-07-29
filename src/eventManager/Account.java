@@ -1,5 +1,8 @@
 package eventManager;
 
+/**
+ * Helper class to store account data.
+ */
 public class Account {
 	public String username;
 	public String password;

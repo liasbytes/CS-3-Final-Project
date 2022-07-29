@@ -199,10 +199,6 @@ implements ActionListener {
 				e1.printStackTrace();
 			}			
 
-		} else if (input == 1) {
-			// no
-		} else if (input == 2) {
-			// cancel
 		}
 	}
 	
