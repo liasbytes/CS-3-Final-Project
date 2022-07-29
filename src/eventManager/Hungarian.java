@@ -194,30 +194,35 @@ public class Hungarian {
 	 * Finds the optimal configuration from the covered zeroes.
 	 */
 	public void step4 () {
-		for (int i = 0; i < mainArr.length; i++) {
-			for (int j = 0; j < mainArr.length; j++) {
-				if (coveredSpaces[i][j] == 1 && mainArr[i][j] == 0) {
-					boolean validX = true;
-					boolean validY = true;
-					// Checks if there is another covered zero in the column or row the zero is in, adds if there isn't both
-					for (int k = 0; k < mainArr.length; k++) {
-						if (mainArr[i][k] == 0 && k != j  && coveredSpaces[i][k]==1) {
-							validX = false;
-						} else if (mainArr[k][j] == 0 && k != i && coveredSpaces[k][j]==1) {
-							validY = false;
-						}
-					}
-					if (validX || validY) {
-						finalChoices[i] = j;
-						// Uncovers the cross of spaces around the one just added
+		boolean changed = false;
+		do {
+			changed = false;
+			for (int i = 0; i < mainArr.length; i++) {
+				for (int j = 0; j < mainArr.length; j++) {
+					if (coveredSpaces[i][j] == 1 && mainArr[i][j] == 0) {
+						boolean validX = true;
+						boolean validY = true;
+						// Checks if there is another covered zero in the column or row the zero is in, adds if there isn't both
 						for (int k = 0; k < mainArr.length; k++) {
-							coveredSpaces[i][k] = 0;
-							coveredSpaces[k][j] = 0;
+							if (mainArr[i][k] == 0 && k != j  && coveredSpaces[i][k]==1) {
+								validX = false;
+							} else if (mainArr[k][j] == 0 && k != i && coveredSpaces[k][j]==1) {
+								validY = false;
+							}
+						}
+						if (validX || validY) {
+							//changed = true;
+							finalChoices[i] = j;
+							// Uncovers the cross of spaces around the one just added
+							for (int k = 0; k < mainArr.length; k++) {
+								coveredSpaces[i][k] = 0;
+								coveredSpaces[k][j] = 0;
+							}
 						}
 					}
 				}
 			}
-		}
+		} while (changed);
 		
 		for (int i = 0; i < mainArr.length; i++) {
 			for (int j = 0; j < mainArr.length; j++) {
