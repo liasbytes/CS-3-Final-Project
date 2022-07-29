@@ -34,6 +34,7 @@ implements ActionListener {
 
 	/**
 	 * constructor to initialize components
+	 * @param frame Main JFrame to pass through all constructors
 	 */
 	public Organizer(JFrame frame)
 	{
@@ -141,6 +142,10 @@ implements ActionListener {
 		deletePanel.setVisible(true);
 	}
 
+	/**
+	 * Deletes a selected booth
+	 * @param booth The booth to delete
+	 */
 	public void deleteBooth(Booth booth) 
 	{
 		int input = JOptionPane.showConfirmDialog(null, 
@@ -200,7 +205,11 @@ implements ActionListener {
 			// cancel
 		}
 	}
-
+	
+	/**
+	 * Reads information about all accounts from file
+	 * @param filePath File to be read
+	 */
 	private void readAccounts(String filePath) {
 		accounts = new HashMap<>();
 		Scanner scan = null;
@@ -227,6 +236,10 @@ implements ActionListener {
 		}
 	}
 
+	/**
+	 * Writes information about accounts to file
+	 * @param filePath File to be written to
+	 */
 	private void writeAccounts(String filePath) 
 	{
 		FileWriter fw = null;
@@ -250,6 +263,9 @@ implements ActionListener {
 		}
 	}
 
+	/**
+	 * Sets all visible panels of this object to hidden
+	 */
 	private static void disableComponents() 
 	{
 		deletePanel.setVisible(false);

@@ -9,10 +9,10 @@ import java.io.*;
 public class BoothReading {
     /**
      * Reads the file and adds booth data into an object, which is added into an
-     * arraylist
+     * ArrayList
      * 
      * @param fileName name or path of file
-     * @return arraylist storing Booth objects
+     * @return ArrayList storing Booth objects
      */
     public static ArrayList<Booth> readFile(String fileName) {
         Scanner scan = null;
